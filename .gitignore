@@ -20,5 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# planning docs + resume master (contains phone/address) — kept local only,
+# never pushed to this public repo
+ai/
+
 # jetbrains setting folder
 .idea/
