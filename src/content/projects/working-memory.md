@@ -47,7 +47,7 @@ anything, and multi-select drag plus undo make it fast enough to actually live i
 Time travel is a pure function that replays events backward from now. History
 isn't a feature some code path can forget; it's a property of the storage layer.
 
-**Durability on a $0 stack.** The hosted instance runs on Render's free tier
+**Durability without paying for it.** The hosted instance runs on Render's free tier
 with deliberately **no persistent disk**: Litestream continuously replicates the
 SQLite database to a Backblaze B2 bucket and restores it on every boot, which
 means every deploy is also a disaster-recovery drill. Daily automated pulls keep
