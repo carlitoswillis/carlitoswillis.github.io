@@ -7,7 +7,6 @@ live: false
 stack: [Blackfin assembly, Python, GNU bfin toolchain, op1repacker]
 summary: I wanted to understand how the original OP-1 synthesizer actually works under the hood. That turned into mapping Teenage Engineering's closed Blackfin firmware, learning its assembly, and eventually writing an oscillator that runs on the hardware itself — every modification byte-verified before flashing, so the original firmware can always be restored.
 order: 3
-dark: true
 ---
 
 ## The problem

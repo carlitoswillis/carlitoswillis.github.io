@@ -15,40 +15,27 @@ const d = project.data;
 <Base title={`${d.title} — Carlitos Willis`} description={d.summary}>
   <article>
     <header class="border-b border-line">
-      <div class="mx-auto max-w-3xl px-5 pt-12 pb-10">
-        <a href="/#projects" class="font-mono text-xs text-steel hover:text-signal">← all projects</a>
-        <p class="mt-6 font-mono text-xs tracking-[0.2em] text-signal uppercase">{d.domain}</p>
-        <h1 class="mt-3 font-display text-4xl font-black tracking-tight sm:text-5xl">
+      <div class="mx-auto max-w-2xl px-5 pt-12 pb-10">
+        <a href="/#projects" class="text-sm text-steel hover:text-signal">← all projects</a>
+        <h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
           {d.title}
         </h1>
-        <div class="mt-6 grid gap-4 border-t border-line pt-5 font-mono text-xs sm:grid-cols-3">
-          <div>
-            <p class="text-steel">STATUS</p>
-            <p class="mt-1 flex items-center gap-2 font-medium">
-              {d.live && <span class="dot-live inline-block h-2 w-2 rounded-full bg-signal"></span>}
-              {d.status}
-            </p>
-            <p class="mt-0.5 text-steel">{d.statusDetail}</p>
-          </div>
-          <div>
-            <p class="text-steel">STACK</p>
-            <p class="mt-1 leading-relaxed font-medium">{d.stack.join(' · ')}</p>
-          </div>
-          <div>
-            <p class="text-steel">EVIDENCE</p>
-            <div class="mt-1 flex flex-col gap-1 font-medium">
-              {d.demo && <a href={d.demo} class="text-signal hover:underline">→ live demo</a>}
-              {d.repo && <a href={d.repo} class="hover:text-signal">→ repo</a>}
-              {!d.demo && !d.repo && <span>this writeup</span>}
-            </div>
-          </div>
+        <p class="mt-2 text-steel lowercase">
+          {d.domain}
+          {d.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
+          {' · '}{d.status} — {d.statusDetail}
+        </p>
+        <p class="mt-3 text-sm text-steel">{d.stack.join(' · ')}</p>
+        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          {d.demo && <a href={d.demo} class="hover:text-signal">live demo</a>}
+          {d.repo && <a href={d.repo} class="hover:text-signal">repo</a>}
         </div>
       </div>
     </header>
 
     {
       d.video && (
-        <div class="mx-auto max-w-3xl px-5 pt-10">
+        <div class="mx-auto max-w-2xl px-5 pt-10">
           <video
             class="w-full rounded-sm border border-line"
             autoplay
@@ -60,16 +47,16 @@ const d = project.data;
             src={d.video}
             aria-label={d.videoAlt}
           />
-          <p class="mt-2 font-mono text-xs text-steel">
+          <p class="mt-2 text-sm text-steel">
             The live demo, rewound: dragging the scrubber re-renders the board as it was.
           </p>
         </div>
       )
     }
 
-    <div class="mx-auto max-w-3xl px-5 py-10">
+    <div class="mx-auto max-w-2xl px-5 py-10">
       <div
-        class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-signal prose-a:decoration-1 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
+        class="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-signal prose-a:decoration-1 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
       >
         <Content />
       </div>

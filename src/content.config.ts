@@ -17,7 +17,6 @@ const projects = defineCollection({
     videoAlt: z.string().optional(),
     summary: z.string(),
     order: z.number(),
-    dark: z.boolean().default(false),
   }),
 });
 
