@@ -46,6 +46,27 @@ const d = project.data;
       </div>
     </header>
 
+    {
+      d.video && (
+        <div class="mx-auto max-w-3xl px-5 pt-10">
+          <video
+            class="w-full rounded-sm border border-line"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={d.poster}
+            src={d.video}
+            aria-label={d.videoAlt}
+          />
+          <p class="mt-2 font-mono text-xs text-steel">
+            The live demo, rewound: dragging the scrubber re-renders the board as it was.
+          </p>
+        </div>
+      )
+    }
+
     <div class="mx-auto max-w-3xl px-5 py-10">
       <div
         class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-signal prose-a:decoration-1 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"

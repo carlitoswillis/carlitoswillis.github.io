@@ -32,6 +32,13 @@ const secondary = [
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/beatpack' }],
   },
   {
+    name: 'Expert',
+    tag: 'OCR · SEARCH',
+    blurb:
+      'Personal-knowledge tool that makes everything you’ve read searchable by content: an OCR ingestion pipeline turns a scattered pile of PDFs into one queryable research collection, with cross-source synthesis as the next arc.',
+    links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/expert' }],
+  },
+  {
     name: 'Ezzy Shop',
     tag: 'SCALING · LOAD TESTING',
     blurb:
@@ -125,6 +132,22 @@ const secondary = [
               >
                 {p.data.summary}
               </p>
+              {p.data.video && (
+                <video
+                  class={
+                    'mt-6 w-full max-w-2xl rounded-sm border ' +
+                    (p.data.dark ? 'border-well-line' : 'border-line')
+                  }
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster={p.data.poster}
+                  src={p.data.video}
+                  aria-label={p.data.videoAlt}
+                />
+              )}
               <div class="mt-6 flex flex-wrap gap-x-7 gap-y-2 font-mono text-sm">
                 {p.data.demo && (
                   <a href={p.data.demo} class="text-signal hover:underline">
@@ -172,6 +195,7 @@ const secondary = [
             </div>
           ))
         }
+        {secondary.length % 2 === 1 && <div class="hidden bg-ground sm:block" aria-hidden="true" />}
       </div>
     </div>
   </section>

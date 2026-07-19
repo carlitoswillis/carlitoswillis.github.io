@@ -7,6 +7,9 @@ live: true
 stack: [Next.js, TypeScript, SQLite, Litestream, Backblaze B2, Docker]
 demo: https://workingmemory.onrender.com
 repo: https://github.com/carlitoswillis/workingmemory
+video: /media/wm-scrubber.mp4
+poster: /media/wm-scrubber.jpg
+videoAlt: Screen recording of the live demo — dragging the time-machine scrubber rewinds the board through three weeks of history, then snaps back to now.
 summary: A task board where every edit appends to an immutable event log, so a time-machine scrubber can re-render the board exactly as it stood at any past moment. Runs on a $0 hosting stack where every deploy doubles as a disaster-recovery drill.
 order: 1
 ---
