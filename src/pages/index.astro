@@ -9,6 +9,7 @@ const projects = (await getCollection('projects')).sort(
 const secondary = [
   {
     name: 'armak.tech',
+    tech: 'Node.js, Express, EJS, Helmet',
     blurb:
       'Live production website for a Southern California low-voltage & networking firm. Every page is driven by a single structured content source, so the client’s content changes never mean touching templates — plus Helmet security headers and dynamic SEO meta.',
     links: [
@@ -18,24 +19,28 @@ const secondary = [
   },
   {
     name: 'Incighder',
+    tech: 'TypeScript, React, Node.js, Spotify / YouTube / SoundCloud / TikTok APIs',
     blurb:
       'Artist-scouting tool built around a surprisingly hard question: are these accounts actually the same artist? A local LLM verifies ambiguous profile matches, while patient scraping (24-hour caches, jittered backoff) turns Spotify, YouTube, SoundCloud, TikTok, and Instagram metrics into comparable growth signals.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/incighder' }],
   },
   {
     name: 'Beatpack',
+    tech: 'Electron, React, Node.js, ffmpeg',
     blurb:
       'Started as scripts for my own music workflow, grew into a desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art overlay, and ffmpeg-driven video assembly. One drop replaces an afternoon of manual export work.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/beatpack' }],
   },
   {
     name: 'Expert',
+    tech: 'React, Node.js, Express, MySQL, OCR, Docker',
     blurb:
       'Personal-knowledge tool that makes everything you’ve read searchable by content: an OCR ingestion pipeline turns a scattered pile of PDFs into one queryable research collection, with cross-source synthesis as the next arc.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/expert' }],
   },
   {
     name: 'Ezzy Shop',
+    tech: 'AWS EC2, Nginx, Redis, PostgreSQL, Node.js, Express, React, Docker',
     blurb:
       'Chased bottlenecks through the whole stack of an e-commerce product service — application, database schema, and infrastructure — with every change measured under load (K6, Loader.io).',
     metrics: [
@@ -144,6 +149,7 @@ const secondary = [
           secondary.map((s) => (
             <div class="py-6 first:pt-0">
               <h3 class="font-display font-medium">{s.name}</h3>
+              <p class="mt-1 text-sm text-steel">{s.tech}</p>
               {s.metrics && (
                 <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1">
                   {s.metrics.map((m) => (
