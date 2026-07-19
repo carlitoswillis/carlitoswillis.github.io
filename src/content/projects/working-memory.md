@@ -10,7 +10,7 @@ repo: https://github.com/carlitoswillis/workingmemory
 video: /media/wm-scrubber.mp4
 poster: /media/wm-scrubber.jpg
 videoAlt: Screen recording of the live demo — dragging the time-machine scrubber rewinds the board through three weeks of history, then snaps back to now.
-summary: A task board where every edit appends to an immutable event log, so a time-machine scrubber can re-render the board exactly as it stood at any past moment. Runs on a $0 hosting stack where every deploy doubles as a disaster-recovery drill.
+summary: I wanted to know what a task app would look like if history wasn't an afterthought. Instead of updating rows in place, every edit becomes an event, so the board can be replayed from the beginning or inspected at any moment in its past. It runs on free hosting where every deploy doubles as a backup-and-recovery drill.
 order: 1
 ---
 

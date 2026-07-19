@@ -6,7 +6,7 @@ statusDetail: local-first · no cloud, no SDK
 live: false
 stack: [Rust, SQLite FTS5, Tauri, TypeScript]
 repo: https://github.com/carlitoswillis/ableton-library
-summary: A Rust scanner that parses Ableton's .als project format (gzipped XML) straight off disk into a full-text SQLite catalog — search a decade of music projects by tempo, plugin, sample, or artist without opening Live, preview them as waveforms, and fly through the library as a 3D similarity map.
+summary: After years of making music I'd accumulated hundreds of Ableton projects that were effectively unsearchable. This tool indexes them straight from disk — no SDK, no cloud — so I can search by tempo, plugin, sample, or artist without opening Live, preview sets as waveforms, and explore related projects through a 3D similarity visualization.
 order: 2
 ---
 

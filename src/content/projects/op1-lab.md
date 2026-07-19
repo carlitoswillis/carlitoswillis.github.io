@@ -5,7 +5,7 @@ status: ON HARDWARE
 statusDetail: custom DSP running on the real device
 live: false
 stack: [Blackfin assembly, Python, GNU bfin toolchain, op1repacker]
-summary: Reverse-engineering the original OP-1 synthesizer like a ROM hack — mapping Teenage Engineering's closed Blackfin firmware, then writing a synth oscillator in hand-written assembly and running it on the actual instrument, reversibly, with byte-level verification before anything touches flash.
+summary: I wanted to understand how the original OP-1 synthesizer actually works under the hood. That turned into mapping Teenage Engineering's closed Blackfin firmware, learning its assembly, and eventually writing an oscillator that runs on the hardware itself — every modification byte-verified before flashing, so the original firmware can always be restored.
 order: 3
 dark: true
 ---

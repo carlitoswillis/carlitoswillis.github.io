@@ -11,7 +11,7 @@ const secondary = [
     name: 'armak.tech',
     tag: 'CLIENT · PRODUCTION',
     blurb:
-      'Live production website for a Southern California low-voltage & networking firm — a modular Express/EJS app driven by a single JSON content source, with Helmet security headers and dynamic SEO meta.',
+      'Live production website for a Southern California low-voltage & networking firm. Every page is driven by a single structured content source, so the client’s content changes never mean touching templates — plus Helmet security headers and dynamic SEO meta.',
     links: [
       { label: 'live site', href: 'https://armak.tech' },
       { label: 'repo', href: 'https://github.com/carlitoswillis/armak.tech' },
@@ -21,14 +21,14 @@ const secondary = [
     name: 'Incighder',
     tag: 'DATA · SCRAPING · LLM',
     blurb:
-      'Artist-scouting tool that aggregates Spotify, YouTube, SoundCloud, TikTok, and Instagram metrics into comparable growth signals — anti-ban scraping with 24h caches and jittered backoff, plus a local LLM that verifies ambiguous account matches.',
+      'Artist-scouting tool built around a surprisingly hard question: are these accounts actually the same artist? A local LLM verifies ambiguous profile matches, while patient scraping (24-hour caches, jittered backoff) turns Spotify, YouTube, SoundCloud, TikTok, and Instagram metrics into comparable growth signals.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/incighder' }],
   },
   {
     name: 'Beatpack',
     tag: 'ELECTRON · MEDIA PIPELINE',
     blurb:
-      'Desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art and logo overlay, and ffmpeg-driven video assembly — one drop replaces an afternoon of manual export work.',
+      'Started as scripts for my own music workflow, grew into a desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art overlay, and ffmpeg-driven video assembly. One drop replaces an afternoon of manual export work.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/beatpack' }],
   },
   {
@@ -42,7 +42,7 @@ const secondary = [
     name: 'Ezzy Shop',
     tag: 'SCALING · LOAD TESTING',
     blurb:
-      'E-commerce product service scaled from 200 to 800 req/s and 230ms to 70ms response time — five EC2 instances behind Nginx, Redis caching, and database-schema fixes, measured with K6 and Loader.io.',
+      'Chased bottlenecks through the whole stack of an e-commerce product service — application, database schema, and infrastructure — taking it from 200 to 800 requests/sec and 230ms to 70ms response time, with every change measured under load (K6, Loader.io).',
     links: [],
   },
 ];
@@ -50,7 +50,7 @@ const secondary = [
 
 <Base
   title="Carlitos Willis — Software Engineer"
-  description="Software engineer in Los Angeles. Event-sourced web apps, Rust tooling for music software, and hand-written assembly running on real hardware — every project links to running code or a technical writeup."
+  description="Software engineer in Los Angeles. Projects that start with a question worth chasing — event sourcing, reverse-engineered synthesizer firmware, developer tools for music — each with working software, source code, or a technical write-up."
 >
   <!-- Hero -->
   <section class="border-b border-line">
@@ -64,9 +64,10 @@ const secondary = [
         I build systems that <span class="text-signal">show their work.</span>
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-steel">
-        Event-sourced web apps, Rust tooling for music software, and hand-written
-        assembly running on a 2011 synthesizer. Everything below links to running
-        code or a technical writeup — no dead ends.
+        Most of my projects start with a question I can't let go. Lately that's
+        led me to event sourcing, reverse-engineering an old synthesizer, and
+        building developer tools for my own music workflow. Every project here
+        includes working software, source code, or a write-up of how it works.
       </p>
       <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3 font-mono text-sm">
         <a href="#projects" class="text-signal hover:underline">→ projects</a>
@@ -173,7 +174,7 @@ const secondary = [
   <!-- Secondary grid -->
   <section aria-label="More projects" class="border-b border-line">
     <div class="mx-auto max-w-5xl px-5 py-12 sm:py-14">
-      <p class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Also shipped</p>
+      <p class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Other projects</p>
       <div class="mt-6 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
         {
           secondary.map((s) => (
