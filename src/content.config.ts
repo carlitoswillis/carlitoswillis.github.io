@@ -15,6 +15,7 @@ const projects = defineCollection({
     video: z.string().optional(),
     poster: z.string().optional(),
     videoAlt: z.string().optional(),
+    videoControls: z.boolean().default(false),
     summary: z.string(),
     order: z.number(),
   }),

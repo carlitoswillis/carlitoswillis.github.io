@@ -34,7 +34,22 @@ const d = project.data;
     </header>
 
     {
-      d.video && (
+      d.video && d.videoControls && (
+        <div class="mx-auto max-w-2xl px-5 pt-10">
+          <video
+            class="w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
+            controls
+            playsinline
+            preload="metadata"
+            poster={d.poster}
+            src={d.video}
+            aria-label={d.videoAlt}
+          />
+        </div>
+      )
+    }
+    {
+      d.video && !d.videoControls && (
         <div class="mx-auto max-w-2xl px-5 pt-10">
           <video
             class="w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"

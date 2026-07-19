@@ -112,7 +112,18 @@ const secondary = [
                 {p.data.title}
               </a>
             </h2>
-            {p.data.video && (
+            {p.data.video && p.data.videoControls && (
+              <video
+                class="mt-5 w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
+                controls
+                playsinline
+                preload="metadata"
+                poster={p.data.poster}
+                src={p.data.video}
+                aria-label={p.data.videoAlt}
+              />
+            )}
+            {p.data.video && !p.data.videoControls && (
               <video
                 class="mt-5 w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
                 autoplay

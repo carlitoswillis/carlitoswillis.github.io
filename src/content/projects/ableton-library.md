@@ -6,6 +6,10 @@ statusDetail: local-first · no cloud, no SDK
 live: false
 stack: [Rust, SQLite FTS5, Tauri, TypeScript]
 repo: https://github.com/carlitoswillis/ableton-library
+video: /media/ableton-library.mp4
+poster: /media/ableton-library.jpg
+videoAlt: Screen recording of the app — searching the library while a preview plays, opening a project's track/device detail panel, then orbiting the 3D similarity map of the whole catalog.
+videoControls: true
 summary: After years of making music I'd accumulated hundreds of Ableton projects that were effectively unsearchable. This tool indexes them straight from disk — no SDK, no cloud — so I can search by tempo, plugin, sample, or artist without opening Live, preview sets as waveforms, and explore related projects through a 3D similarity visualization.
 order: 2
 ---
