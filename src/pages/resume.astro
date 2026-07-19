@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+
+const skills = [
+  { label: 'Languages', items: 'JavaScript (ES5/ES6), TypeScript, Python, Ruby, SQL, Rust, CSS3, HTML5' },
+  {
+    label: 'Technologies & Frameworks',
+    items:
+      'React, Node, Express, Next.js, Postgres, MySQL, SQLite, AWS CLI/EC2, Docker, Selenium, Jest, Webpack, Git, Amplitude, Optimizely, New Relic, Datadog, Styled-Components, Claude, Gemini CLI',
+  },
+];
+
+const experience = [
+  {
+    title: 'Independent Software Engineer & Consultant',
+    org: '',
+    location: 'Los Angeles, CA',
+    dates: 'November 2023 – Present',
+    bullets: [
+      'Built data aggregation tools in Python and Node.js to track audience growth and engagement across Spotify, TikTok, and YouTube, consolidating data into PostgreSQL.',
+      'Developed Selenium-based web scrapers and API integrations to ingest 5K–20K+ data points daily, normalizing inconsistent schemas across platforms.',
+      'Designed automated data pipelines to process streaming and social data, generating growth signals used to evaluate dozens of emerging recording artists.',
+      'Delivered data-driven insights that reduced manual analysis time and informed audience targeting, engagement strategy, and release planning for music industry stakeholders.',
+    ],
+  },
+  {
+    title: 'Full-Stack Engineer, Growth',
+    org: 'Gusto',
+    location: 'Los Angeles, CA',
+    dates: 'Oct 2021 – Oct 2023',
+    bullets: [
+      'Designed and executed dozens of A/B tests with React, TypeScript, and Ruby — nine in just six months, achieving a 15.5% increase in Visit-to-Lead Conversion Rate (CvR) and a 5.8% year-over-year increase in Direct 30-day Lead-to-Join CvR.',
+      'Led the redesign of the experiment tracker and setup process, significantly cutting setup time by 40–60% and increasing process transparency.',
+      'Developed an in-house testing hub, reducing experiment-sharing setup from an hour to 5 minutes.',
+    ],
+  },
+  {
+    title: 'Digital Marketer, Music Producer',
+    org: 'Freelance',
+    location: 'NYC + LA',
+    dates: '2018 – 2020',
+    bullets: [
+      'Automated content planning, creation, and marketing workflows using Python scripts to fill templates, enhancing operational efficiency and reducing onboarding time.',
+      'Overhauled lead gen for businesses and recording artists through landing pages with tracking pixels.',
+    ],
+  },
+  {
+    title: 'Media Fellow',
+    org: 'UCSA (Non-Profit Org)',
+    location: 'Berkeley, CA',
+    dates: '2017 – 2018',
+    bullets: [
+      'Expanded social media reach 10x with targeted advertising, analytics, and custom Python scripts.',
+    ],
+  },
+];
+
+const projects = [
+  {
+    name: 'Working Memory',
+    detail: 'Event-sourced task board you can rewind to any past state',
+    href: '/projects/working-memory/',
+    bullets: [
+      'Built an append-only, event-sourced task board where every edit, move, and completion appends to an item_events log via SQLite triggers — making the board’s full state reconstructable at any past point in time, with multi-account isolation enforced at the query layer.',
+      'Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot, backed by daily automated pulls and an uptime worker that eliminates cold-start churn.',
+    ],
+  },
+  {
+    name: 'Ableton Library',
+    detail: 'Rust catalog + desktop app for a decade of Ableton projects',
+    href: '/projects/ableton-library/',
+    bullets: [
+      'Wrote a lenient Rust parser for Ableton’s undocumented .als format (gzipped XML) feeding a SQLite FTS5 catalog: search hundreds of projects by tempo, plugin, sample, or artist in milliseconds, with waveform previews and a 3D similarity map in a Tauri app.',
+    ],
+  },
+  {
+    name: 'OP-1 Lab',
+    detail: 'Firmware reverse engineering; custom DSP on real hardware',
+    href: '/projects/op1-lab/',
+    bullets: [
+      'Mapped the OP-1 synthesizer’s closed Blackfin firmware and injected a hand-written assembly synth engine that runs on the physical instrument — byte-verified patches, a host-side Blackfin interpreter for pre-flash verification, and strictly reversible changes.',
+    ],
+  },
+  {
+    name: 'armak.tech',
+    detail: 'Production website for a low-voltage & networking firm',
+    href: 'https://armak.tech',
+    bullets: [
+      'Built and shipped the live production site for a real business: a modular EJS/Express app driven by a single JSON content source, with Helmet security headers, gzip compression, and dynamic SEO meta generation.',
+    ],
+  },
+  {
+    name: 'Ezzy Shop',
+    detail: 'E-commerce service split into independently-scaled microservices',
+    href: null,
+    bullets: [
+      'Boosted load capacity from 200 to 800 requests/sec and cut server response time from 230ms to 70ms by load-balancing 5 AWS EC2 instances behind Nginx with Redis caching and remedying database-schema bottlenecks.',
+    ],
+  },
+];
+
+const education = [
+  { school: 'University of California, Berkeley', detail: 'Bachelor of Arts, Cognitive Science', year: '2021' },
+  { school: 'Galvanize', detail: 'Advanced Software Engineering Immersive at Hack Reactor', year: '2020' },
+  { school: 'Formation Fellowship', detail: 'Personalized coaching from top-tier SWEs', year: '2021, 2026' },
+];
+---
+
+<Base
+  title="Resume — Carlitos Willis"
+  description="Resume of Carlitos Willis, software engineer in Los Angeles: full-stack growth engineering at Gusto, independent consulting, and systems projects in TypeScript and Rust."
+>
+  <div class="mx-auto max-w-3xl px-5 py-12">
+    <header class="border-b-2 border-ink pb-6">
+      <h1 class="font-display text-4xl font-black tracking-tight">Carlitos Willis</h1>
+      <p class="mt-2 text-steel">Software Engineer · Los Angeles, CA</p>
+      <div class="mt-3 flex flex-wrap gap-x-6 gap-y-1 font-mono text-sm">
+        <a href="mailto:carlitoswillis@berkeley.edu" class="text-signal hover:underline">carlitoswillis@berkeley.edu</a>
+        <a href="https://github.com/carlitoswillis" class="hover:text-signal">github.com/carlitoswillis</a>
+        <a href="https://linkedin.com/in/carlitoswillis" class="hover:text-signal">linkedin.com/in/carlitoswillis</a>
+      </div>
+      <p class="no-print mt-4 font-mono text-xs text-steel">
+        Printable — use your browser's print dialog for a PDF copy.
+      </p>
+    </header>
+
+    <section class="mt-8">
+      <h2 class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Skills</h2>
+      <dl class="mt-3 space-y-2 text-sm leading-relaxed">
+        {
+          skills.map((s) => (
+            <div>
+              <dt class="inline font-semibold">{s.label}: </dt>
+              <dd class="inline text-ink/85">{s.items}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Experience</h2>
+      <div class="mt-4 space-y-7">
+        {
+          experience.map((e) => (
+            <div>
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 class="font-display text-lg font-bold">
+                  {e.title}
+                  {e.org && <span class="font-medium text-steel"> — {e.org}</span>}
+                </h3>
+                <p class="font-mono text-xs text-steel">{e.dates}</p>
+              </div>
+              <p class="font-mono text-xs text-steel">{e.location}</p>
+              <ul class="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink/85">
+                {e.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Projects</h2>
+      <div class="mt-4 space-y-6">
+        {
+          projects.map((p) => (
+            <div>
+              <h3 class="font-display text-lg font-bold">
+                {p.href ? (
+                  <a href={p.href} class="hover:text-signal">
+                    {p.name}
+                  </a>
+                ) : (
+                  p.name
+                )}
+                <span class="font-medium text-steel"> — {p.detail}</span>
+              </h3>
+              <ul class="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink/85">
+                {p.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Education</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        {
+          education.map((ed) => (
+            <li class="flex flex-wrap items-baseline justify-between gap-x-4">
+              <span>
+                <span class="font-semibold">{ed.school}</span>
+                <span class="text-ink/85"> — {ed.detail}</span>
+              </span>
+              <span class="font-mono text-xs text-steel">{ed.year}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Base>

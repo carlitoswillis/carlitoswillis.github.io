@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "@fontsource/archivo/latin-500.css";
+@import "@fontsource/archivo/latin-700.css";
+@import "@fontsource/archivo/latin-900.css";
+@import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-500.css";
+@import "@fontsource/ibm-plex-sans/latin-600.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* anodized-aluminum ground, ink, one signal orange — spec-sheet palette */
+  --color-ground: #e9e8e3;
+  --color-panel: #f3f2ee;
+  --color-ink: #191a1c;
+  --color-steel: #5d6165;
+  --color-line: #cfcec6;
+  --color-signal: #d94a05;
+  --color-well: #141517;
+  --color-well-line: #2b2d30;
+  --color-well-text: #e6e5e0;
+  --color-well-steel: #9a9da0;
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+}
+
+html {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: #fff;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+/* status dot for LIVE records */
+.dot-live {
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .dot-live { animation: none; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  html { background: #fff; }
+}

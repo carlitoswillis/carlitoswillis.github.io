@@ -1,0 +1,178 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const secondary = [
+  {
+    name: 'armak.tech',
+    tag: 'CLIENT · PRODUCTION',
+    blurb:
+      'Live production website for a Southern California low-voltage & networking firm — a modular Express/EJS app driven by a single JSON content source, with Helmet security headers and dynamic SEO meta.',
+    links: [
+      { label: 'live site', href: 'https://armak.tech' },
+      { label: 'repo', href: 'https://github.com/carlitoswillis/armak.tech' },
+    ],
+  },
+  {
+    name: 'Incighder',
+    tag: 'DATA · SCRAPING · LLM',
+    blurb:
+      'Artist-scouting tool that aggregates Spotify, YouTube, SoundCloud, TikTok, and Instagram metrics into comparable growth signals — anti-ban scraping with 24h caches and jittered backoff, plus a local LLM that verifies ambiguous account matches.',
+    links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/incighder' }],
+  },
+  {
+    name: 'Beatpack',
+    tag: 'ELECTRON · MEDIA PIPELINE',
+    blurb:
+      'Desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art and logo overlay, and ffmpeg-driven video assembly — one drop replaces an afternoon of manual export work.',
+    links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/beatpack' }],
+  },
+  {
+    name: 'Ezzy Shop',
+    tag: 'SCALING · LOAD TESTING',
+    blurb:
+      'E-commerce product service scaled from 200 to 800 req/s and 230ms to 70ms response time — five EC2 instances behind Nginx, Redis caching, and database-schema fixes, measured with K6 and Loader.io.',
+    links: [],
+  },
+];
+---
+
+<Base
+  title="Carlitos Willis — Software Engineer"
+  description="Software engineer in Los Angeles. Event-sourced web apps, Rust tooling for music software, and hand-written assembly running on real hardware — every project links to running code or a technical writeup."
+>
+  <!-- Hero -->
+  <section class="border-b border-line">
+    <div class="mx-auto max-w-5xl px-5 pt-16 pb-14 sm:pt-24 sm:pb-20">
+      <p class="font-mono text-xs tracking-[0.2em] text-steel uppercase">
+        Carlitos Willis · software engineer · Los Angeles, CA
+      </p>
+      <h1
+        class="mt-5 max-w-3xl font-display text-4xl leading-[1.05] font-black tracking-tight sm:text-6xl"
+      >
+        I build systems that <span class="text-signal">show their work.</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-steel">
+        Event-sourced web apps, Rust tooling for music software, and hand-written
+        assembly running on a 2011 synthesizer. Everything below links to running
+        code or a technical writeup — no dead ends.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3 font-mono text-sm">
+        <a href="#projects" class="text-signal hover:underline">→ projects</a>
+        <a href="/resume/" class="hover:text-signal">→ resume</a>
+        <a href="https://github.com/carlitoswillis" class="hover:text-signal">→ github</a>
+        <a href="https://linkedin.com/in/carlitoswillis" class="hover:text-signal">→ linkedin</a>
+        <a href="mailto:carlitoswillis@berkeley.edu" class="hover:text-signal">→ email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured records -->
+  <section id="projects" aria-label="Featured projects">
+    {
+      projects.map((p) => (
+        <article
+          class={
+            p.data.dark
+              ? 'border-b border-well-line bg-well text-well-text'
+              : 'border-b border-line'
+          }
+        >
+          <div class="mx-auto grid max-w-5xl gap-8 px-5 py-12 sm:py-14 md:grid-cols-[240px_1fr]">
+            <div
+              class={
+                'flex flex-col gap-4 font-mono text-xs md:border-r md:pr-8 ' +
+                (p.data.dark ? 'md:border-well-line' : 'md:border-line')
+              }
+            >
+              <div>
+                <p class={p.data.dark ? 'text-well-steel' : 'text-steel'}>FIELD</p>
+                <p class="mt-1 font-medium">{p.data.domain}</p>
+              </div>
+              <div>
+                <p class={p.data.dark ? 'text-well-steel' : 'text-steel'}>STATUS</p>
+                <p class="mt-1 flex items-center gap-2 font-medium">
+                  {p.data.live && (
+                    <span class="dot-live inline-block h-2 w-2 rounded-full bg-signal" />
+                  )}
+                  {p.data.status}
+                </p>
+                <p class={'mt-0.5 ' + (p.data.dark ? 'text-well-steel' : 'text-steel')}>
+                  {p.data.statusDetail}
+                </p>
+              </div>
+              <div>
+                <p class={p.data.dark ? 'text-well-steel' : 'text-steel'}>STACK</p>
+                <p class="mt-1 leading-relaxed font-medium">{p.data.stack.join(' · ')}</p>
+              </div>
+            </div>
+
+            <div>
+              <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                <a href={`/projects/${p.id}/`} class="hover:text-signal">
+                  {p.data.title}
+                </a>
+              </h2>
+              <p
+                class={
+                  'mt-4 max-w-2xl leading-relaxed ' +
+                  (p.data.dark ? 'text-well-steel' : 'text-steel')
+                }
+              >
+                {p.data.summary}
+              </p>
+              <div class="mt-6 flex flex-wrap gap-x-7 gap-y-2 font-mono text-sm">
+                {p.data.demo && (
+                  <a href={p.data.demo} class="text-signal hover:underline">
+                    → live demo
+                  </a>
+                )}
+                <a href={`/projects/${p.id}/`} class={p.data.demo ? 'hover:text-signal' : 'text-signal hover:underline'}>
+                  → case study
+                </a>
+                {p.data.repo && (
+                  <a href={p.data.repo} class="hover:text-signal">
+                    → repo
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <!-- Secondary grid -->
+  <section aria-label="More projects" class="border-b border-line">
+    <div class="mx-auto max-w-5xl px-5 py-12 sm:py-14">
+      <p class="font-mono text-xs tracking-[0.2em] text-steel uppercase">Also shipped</p>
+      <div class="mt-6 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
+        {
+          secondary.map((s) => (
+            <div class="flex flex-col bg-panel p-6">
+              <p class="font-mono text-[11px] tracking-wider text-steel">{s.tag}</p>
+              <h3 class="mt-2 font-display text-xl font-bold">{s.name}</h3>
+              <p class="mt-2 grow text-sm leading-relaxed text-steel">{s.blurb}</p>
+              <div class="mt-4 flex gap-5 font-mono text-xs">
+                {s.links.length ? (
+                  s.links.map((l) => (
+                    <a href={l.href} class="text-signal hover:underline">
+                      → {l.label}
+                    </a>
+                  ))
+                ) : (
+                  <span class="text-steel">architecture write-up on request</span>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

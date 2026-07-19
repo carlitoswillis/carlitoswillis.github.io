@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="min-h-screen bg-ground text-ink antialiased">
+    <header class="no-print border-b-2 border-ink">
+      <nav class="mx-auto flex max-w-5xl items-baseline justify-between px-5 py-4">
+        <a href="/" class="font-mono text-sm font-medium tracking-tight hover:text-signal">carlitoswillis</a>
+        <div class="flex gap-5 font-mono text-xs text-steel sm:gap-7 sm:text-sm">
+          <a href="/#projects" class="hover:text-signal">projects</a>
+          <a href="/resume/" class="hover:text-signal">resume</a>
+          <a href="https://github.com/carlitoswillis" class="hover:text-signal">github ↗</a>
+        </div>
+      </nav>
+    </header>
+
+    <slot />
+
+    <footer class="no-print border-t-2 border-ink bg-well text-well-text">
+      <div class="mx-auto flex max-w-5xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="font-display text-lg font-bold">Carlitos Willis</p>
+          <p class="mt-1 font-mono text-xs text-well-steel">software engineer · los angeles, ca</p>
+        </div>
+        <div class="flex flex-col gap-2 font-mono text-sm sm:items-end">
+          <a href="mailto:carlitoswillis@berkeley.edu" class="hover:text-signal">carlitoswillis@berkeley.edu</a>
+          <div class="flex gap-5 text-well-steel">
+            <a href="https://github.com/carlitoswillis" class="hover:text-signal">github</a>
+            <a href="https://linkedin.com/in/carlitoswillis" class="hover:text-signal">linkedin</a>
+            <a href="/resume/" class="hover:text-signal">resume</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-well-line">
+        <p class="mx-auto max-w-5xl px-5 py-3 font-mono text-[11px] text-well-steel">
+          static site — astro + tailwind · no trackers, no cookies
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
