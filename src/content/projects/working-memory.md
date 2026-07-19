@@ -14,7 +14,7 @@ summary: I wanted to know what a task app would look like if history wasn't an a
 order: 1
 ---
 
-**[Try the live demo](https://workingmemory.onrender.com)** — no signup; you get
+**<a href="https://workingmemory.onrender.com" target="_blank" rel="noopener noreferrer">Try the live demo</a>** — no signup; you get
 your own throwaway board pre-loaded with three weeks of history, so the time
 machine has somewhere to go. (Free-tier host: the first load after an idle spell
 takes about a minute.)

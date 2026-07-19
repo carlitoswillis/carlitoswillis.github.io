@@ -120,9 +120,9 @@ const education = [
       <h1 class="text-3xl font-semibold tracking-tight">Carlitos Willis</h1>
       <p class="mt-2 text-steel">Software Engineer · Los Angeles, CA</p>
       <div class="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
-        <a href="mailto:carlitoswillis@berkeley.edu" class="hover:text-signal">carlitoswillis@berkeley.edu</a>
-        <a href="https://github.com/carlitoswillis" class="hover:text-signal">github.com/carlitoswillis</a>
-        <a href="https://linkedin.com/in/carlitoswillis" class="hover:text-signal">linkedin.com/in/carlitoswillis</a>
+        <a href="mailto:carlitoswillis@berkeley.edu" class="link">carlitoswillis@berkeley.edu</a>
+        <a href="https://github.com/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">github.com/carlitoswillis</a>
+        <a href="https://linkedin.com/in/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">linkedin.com/in/carlitoswillis</a>
       </div>
       <p class="no-print mt-4 text-sm text-steel">
         Printable — use your browser's print dialog for a PDF copy.
@@ -176,7 +176,7 @@ const education = [
             <div>
               <h3 class="text-lg font-semibold">
                 {p.href ? (
-                  <a href={p.href} class="hover:text-signal">
+                  <a href={p.href} class="link" target="_blank" rel="noopener noreferrer">
                     {p.name}
                   </a>
                 ) : (

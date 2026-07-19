@@ -14,7 +14,7 @@
   --color-ink: #201f1c;
   --color-steel: #726e66;
   --color-line: #e4e1d8;
-  --color-signal: #3d6656;
+  --color-signal: #1d4ed8;
 
   --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
@@ -36,6 +36,16 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-signal);
   outline-offset: 3px;
+}
+
+/* obviously-a-link: blue + underline, everywhere a link goes somewhere */
+.link {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.link:hover {
+  opacity: 0.7;
 }
 
 /* status dot for LIVE records */

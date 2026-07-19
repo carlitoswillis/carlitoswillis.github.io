@@ -16,7 +16,7 @@ const d = project.data;
   <article>
     <header class="border-b border-line">
       <div class="mx-auto max-w-2xl px-5 pt-12 pb-10">
-        <a href="/#projects" class="text-sm text-steel hover:text-signal">← all projects</a>
+        <a href="/#projects" class="link text-sm">← all projects</a>
         <h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
           {d.title}
         </h1>
@@ -27,8 +27,8 @@ const d = project.data;
         </p>
         <p class="mt-3 text-sm text-steel">{d.stack.join(' · ')}</p>
         <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          {d.demo && <a href={d.demo} class="hover:text-signal">live demo</a>}
-          {d.repo && <a href={d.repo} class="hover:text-signal">repo</a>}
+          {d.demo && <a href={d.demo} class="link" target="_blank" rel="noopener noreferrer">live demo</a>}
+          {d.repo && <a href={d.repo} class="link" target="_blank" rel="noopener noreferrer">repo</a>}
         </div>
       </div>
     </header>
@@ -56,7 +56,7 @@ const d = project.data;
 
     <div class="mx-auto max-w-2xl px-5 py-10">
       <div
-        class="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-signal prose-a:decoration-1 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
+        class="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-signal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
       >
         <Content />
       </div>

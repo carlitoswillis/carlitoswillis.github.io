@@ -61,11 +61,11 @@ const secondary = [
         includes working software, source code, or a write-up of how it works.
       </p>
       <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <a href="#projects" class="hover:text-signal">projects</a>
-        <a href="/resume/" class="hover:text-signal">resume</a>
-        <a href="https://github.com/carlitoswillis" class="hover:text-signal">github</a>
-        <a href="https://linkedin.com/in/carlitoswillis" class="hover:text-signal">linkedin</a>
-        <a href="mailto:carlitoswillis@berkeley.edu" class="hover:text-signal">email</a>
+        <a href="#projects" class="link">projects</a>
+        <a href="/resume/" class="link" target="_blank" rel="noopener noreferrer">resume</a>
+        <a href="https://github.com/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">github</a>
+        <a href="https://linkedin.com/in/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">linkedin</a>
+        <a href="mailto:carlitoswillis@berkeley.edu" class="link">email</a>
       </div>
     </div>
   </section>
@@ -79,10 +79,17 @@ const secondary = [
             <p class="text-sm text-steel lowercase">
               {p.data.domain}
               {p.data.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
-              {' · '}{p.data.statusDetail}
+              {' · '}
+              {p.data.demo ? (
+                <a href={p.data.demo} class="link" target="_blank" rel="noopener noreferrer">
+                  {p.data.statusDetail}
+                </a>
+              ) : (
+                p.data.statusDetail
+              )}
             </p>
             <h2 class="mt-2 text-2xl font-semibold tracking-tight">
-              <a href={`/projects/${p.id}/`} class="hover:text-signal">
+              <a href={`/projects/${p.id}/`} class="link" target="_blank" rel="noopener noreferrer">
                 {p.data.title}
               </a>
             </h2>
@@ -102,15 +109,15 @@ const secondary = [
             )}
             <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
               {p.data.demo && (
-                <a href={p.data.demo} class="hover:text-signal">
+                <a href={p.data.demo} class="link" target="_blank" rel="noopener noreferrer">
                   live demo
                 </a>
               )}
-              <a href={`/projects/${p.id}/`} class="hover:text-signal">
+              <a href={`/projects/${p.id}/`} class="link" target="_blank" rel="noopener noreferrer">
                 case study
               </a>
               {p.data.repo && (
-                <a href={p.data.repo} class="hover:text-signal">
+                <a href={p.data.repo} class="link" target="_blank" rel="noopener noreferrer">
                   repo
                 </a>
               )}
@@ -134,7 +141,7 @@ const secondary = [
               <div class="mt-3 flex gap-5 text-sm">
                 {s.links.length ? (
                   s.links.map((l) => (
-                    <a href={l.href} class="hover:text-signal">
+                    <a href={l.href} class="link" target="_blank" rel="noopener noreferrer">
                       {l.label}
                     </a>
                   ))
