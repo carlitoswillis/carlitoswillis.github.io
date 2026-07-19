@@ -176,9 +176,15 @@ const education = [
             <div>
               <h3 class="text-lg font-semibold">
                 {p.href ? (
-                  <a href={p.href} class="link" target="_blank" rel="noopener noreferrer">
-                    {p.name}
-                  </a>
+                  p.href.startsWith('http') ? (
+                    <a href={p.href} class="link" target="_blank" rel="noopener noreferrer">
+                      {p.name}
+                    </a>
+                  ) : (
+                    <a href={p.href} class="link">
+                      {p.name}
+                    </a>
+                  )
                 ) : (
                   p.name
                 )}
