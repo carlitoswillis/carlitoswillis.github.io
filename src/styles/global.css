@@ -1,21 +1,24 @@
 @import "tailwindcss";
+@import "@fontsource/space-grotesk/latin-500.css";
+@import "@fontsource/space-grotesk/latin-700.css";
 @import "@fontsource/ibm-plex-sans/latin-400.css";
 @import "@fontsource/ibm-plex-sans/latin-500.css";
 @import "@fontsource/ibm-plex-sans/latin-600.css";
-@import "@fontsource/ibm-plex-sans/latin-700.css";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
 
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* one plain, low-key palette — a paper page, not a spec sheet */
+  /* warm paper ground, confident ink, one hyperlink blue */
   --color-ground: #faf9f6;
   --color-panel: #f2f1eb;
-  --color-ink: #201f1c;
-  --color-steel: #726e66;
-  --color-line: #e4e1d8;
+  --color-ink: #181815;
+  --color-steel: #68655d;
+  --color-line: #e3e1d8;
   --color-signal: #1d4ed8;
 
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 }

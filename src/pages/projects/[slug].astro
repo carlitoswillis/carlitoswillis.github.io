@@ -17,10 +17,10 @@ const d = project.data;
     <header class="border-b border-line">
       <div class="mx-auto max-w-2xl px-5 pt-12 pb-10">
         <a href="/#projects" class="link text-sm">← all projects</a>
-        <h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h1 class="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
           {d.title}
         </h1>
-        <p class="mt-2 text-steel lowercase">
+        <p class="mt-3 text-steel lowercase">
           {d.domain}
           {d.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
           {' · '}{d.status} — {d.statusDetail}
@@ -37,7 +37,7 @@ const d = project.data;
       d.video && (
         <div class="mx-auto max-w-2xl px-5 pt-10">
           <video
-            class="w-full rounded-sm border border-line"
+            class="w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
             autoplay
             muted
             loop
@@ -56,7 +56,7 @@ const d = project.data;
 
     <div class="mx-auto max-w-2xl px-5 py-10">
       <div
-        class="prose prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-signal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
+        class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-signal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
       >
         <Content />
       </div>

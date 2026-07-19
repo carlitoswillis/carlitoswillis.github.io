@@ -37,7 +37,11 @@ const secondary = [
   {
     name: 'Ezzy Shop',
     blurb:
-      'Chased bottlenecks through the whole stack of an e-commerce product service — application, database schema, and infrastructure — taking it from 200 to 800 requests/sec and 230ms to 70ms response time, with every change measured under load (K6, Loader.io).',
+      'Chased bottlenecks through the whole stack of an e-commerce product service — application, database schema, and infrastructure — with every change measured under load (K6, Loader.io).',
+    metrics: [
+      { value: '200 → 800', unit: 'req/s' },
+      { value: '230 → 70', unit: 'ms' },
+    ],
     links: [],
   },
 ];
@@ -50,8 +54,11 @@ const secondary = [
   <!-- Hero -->
   <section class="border-b border-line">
     <div class="mx-auto max-w-2xl px-5 pt-16 pb-14 sm:pt-20">
-      <p class="text-steel">Carlitos Willis — software engineer, Los Angeles</p>
-      <h1 class="mt-3 text-3xl leading-snug font-semibold tracking-tight sm:text-4xl">
+      <p class="font-mono text-sm text-steel">
+        <span class="text-signal">$</span> currently: rewinding a task board, indexing a decade
+        of Ableton sessions, reverse-engineering a synth
+      </p>
+      <h1 class="mt-4 font-display text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl">
         Developer tools, systems programming, and music technology.
       </h1>
       <p class="mt-5 max-w-xl leading-relaxed text-steel">
@@ -75,7 +82,7 @@ const secondary = [
     {
       projects.map((p) => (
         <article class="border-b border-line">
-          <div class="mx-auto max-w-2xl px-5 py-12">
+          <div class="mx-auto max-w-3xl px-5 py-12">
             <p class="text-sm text-steel lowercase">
               {p.data.domain}
               {p.data.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
@@ -88,15 +95,14 @@ const secondary = [
                 p.data.statusDetail
               )}
             </p>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight">
-              <a href={`/projects/${p.id}/`} class="link">
+            <h2 class="mt-2 font-display text-3xl font-bold tracking-tight">
+              <a href={`/projects/${p.id}/`} class="hover:text-signal">
                 {p.data.title}
               </a>
             </h2>
-            <p class="mt-3 max-w-xl leading-relaxed text-steel">{p.data.summary}</p>
             {p.data.video && (
               <video
-                class="mt-6 w-full max-w-xl rounded-sm border border-line"
+                class="mt-5 w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
                 autoplay
                 muted
                 loop
@@ -107,6 +113,7 @@ const secondary = [
                 aria-label={p.data.videoAlt}
               />
             )}
+            <p class="mt-5 max-w-xl leading-relaxed text-steel">{p.data.summary}</p>
             <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
               {p.data.demo && (
                 <a href={p.data.demo} class="link" target="_blank" rel="noopener noreferrer">
@@ -136,8 +143,17 @@ const secondary = [
         {
           secondary.map((s) => (
             <div class="py-6 first:pt-0">
-              <h3 class="font-semibold">{s.name}</h3>
-              <p class="mt-1 leading-relaxed text-steel">{s.blurb}</p>
+              <h3 class="font-display font-medium">{s.name}</h3>
+              {s.metrics && (
+                <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+                  {s.metrics.map((m) => (
+                    <p class="font-mono text-sm font-medium text-ink">
+                      {m.value} <span class="text-steel">{m.unit}</span>
+                    </p>
+                  ))}
+                </div>
+              )}
+              <p class="mt-2 leading-relaxed text-steel">{s.blurb}</p>
               <div class="mt-3 flex gap-5 text-sm">
                 {s.links.length ? (
                   s.links.map((l) => (
