@@ -60,6 +60,7 @@ const projects = [
     name: 'Working Memory',
     detail: 'Event-sourced task board you can rewind to any past state',
     href: '/projects/working-memory/',
+    tech: 'Next.js, TypeScript, React, SQLite, Litestream, Backblaze B2, Docker, dnd-kit, Tailwind',
     bullets: [
       'Built an append-only, event-sourced task board where every edit, move, and completion appends to an item_events log via SQLite triggers — making the board’s full state reconstructable at any past point in time, with multi-account isolation enforced at the query layer.',
       'Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot, backed by daily automated pulls and an uptime worker that eliminates cold-start churn.',
@@ -69,6 +70,7 @@ const projects = [
     name: 'Ableton Library',
     detail: 'Rust catalog + desktop app for a decade of Ableton projects',
     href: '/projects/ableton-library/',
+    tech: 'Rust, SQLite FTS5, Tauri, TypeScript',
     bullets: [
       'Wrote a lenient Rust parser for Ableton’s undocumented .als format (gzipped XML) feeding a SQLite FTS5 catalog: search hundreds of projects by tempo, plugin, sample, or artist in milliseconds, with waveform previews and a 3D similarity map in a Tauri app.',
     ],
@@ -77,6 +79,7 @@ const projects = [
     name: 'OP-1 Lab',
     detail: 'Firmware reverse engineering; custom DSP on real hardware',
     href: '/projects/op1-lab/',
+    tech: 'Blackfin assembly, Python, GNU bfin toolchain, op1repacker',
     bullets: [
       'Mapped the OP-1 synthesizer’s closed Blackfin firmware and injected a hand-written assembly synth engine that runs on the physical instrument — byte-verified patches, a host-side Blackfin interpreter for pre-flash verification, and strictly reversible changes.',
     ],
@@ -85,6 +88,7 @@ const projects = [
     name: 'armak.tech',
     detail: 'Production website for a low-voltage & networking firm',
     href: 'https://armak.tech',
+    tech: 'Node.js, Express, EJS, Helmet, vanilla JS/CSS',
     bullets: [
       'Built and shipped the live production site for a real business: a modular EJS/Express app driven by a single JSON content source, with Helmet security headers, gzip compression, and dynamic SEO meta generation.',
     ],
@@ -93,6 +97,7 @@ const projects = [
     name: 'Ezzy Shop',
     detail: 'E-commerce service split into independently-scaled microservices',
     href: null,
+    tech: 'AWS EC2, Nginx, Redis, PostgreSQL, Node.js, Express, React, Docker, K6, Loader.io',
     bullets: [
       'Boosted load capacity from 200 to 800 requests/sec and cut server response time from 230ms to 70ms by load-balancing 5 AWS EC2 instances behind Nginx with Redis caching and remedying database-schema bottlenecks.',
     ],
@@ -179,6 +184,7 @@ const education = [
                 )}
                 <span class="font-medium text-steel"> — {p.detail}</span>
               </h3>
+              <p class="mt-1 text-sm text-steel">{p.tech}</p>
               <ul class="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-ink/85">
                 {p.bullets.map((b) => (
                   <li>{b}</li>
