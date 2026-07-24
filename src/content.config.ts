@@ -18,6 +18,7 @@ const projects = defineCollection({
     videoControls: z.boolean().default(false),
     summary: z.string(),
     order: z.number(),
+    featured: z.boolean().default(true),
   }),
 });
 
