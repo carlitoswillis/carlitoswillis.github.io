@@ -9,13 +9,10 @@ const projects = (await getCollection('projects'))
 const secondary = [
   {
     name: 'armak.tech',
-    tech: 'Node.js, Express, EJS, Helmet',
+    tech: 'Vite, EJS, Vanilla JS, HTML Canvas',
     blurb:
-      'Live production website for a Southern California low-voltage & networking firm. Every page is driven by a single structured content source, so the client’s content changes never mean touching templates — plus Helmet security headers and dynamic SEO meta.',
-    links: [
-      { label: 'live site', href: 'https://armak.tech' },
-      { label: 'repo', href: 'https://github.com/carlitoswillis/armak.tech' },
-    ],
+      'Live production website for a Southern California low-voltage & networking firm. A static Vite + EJS build with hand-written Canvas animations — a mouse-reactive particle network and an animated SVG service-area map — lazy-loaded per viewport, a backend-less contact form, and WebP heroes tuned for a fast LCP.',
+    links: [{ label: 'live site', href: 'https://armak.tech' }],
   },
   {
     name: 'Incighder',
@@ -37,9 +34,9 @@ const secondary = [
   },
   {
     name: 'Expert',
-    tech: 'React, Node.js, Express, MySQL, OCR, Docker',
+    tech: 'React, Node.js, Express, JSON store (MySQL optional), WASM OCR',
     blurb:
-      'Personal-knowledge tool that makes everything you’ve read searchable by content: an OCR ingestion pipeline turns a scattered pile of PDFs into one queryable research collection, with cross-source synthesis as the next arc.',
+      'Personal-knowledge tool that makes everything you’ve read searchable by content: image-only scans are detected and run through a background WASM OCR pipeline, so even text-less PDFs join one queryable research collection — with cross-source synthesis as the next arc.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/expert' }],
   },
   {
