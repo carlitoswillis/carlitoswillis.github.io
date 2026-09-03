@@ -22,6 +22,11 @@ jobs:
       - uses: withastro/action@v3
         with:
           node-version: 22
+        env:
+          # JSON array of regex sources for scripts/privacy-guard.mjs. The
+          # patterns describe the private data they guard, so they never live
+          # in the tree. Without this secret the guard warns and skips in CI.
+          PRIVACY_PATTERNS: ${{ secrets.PRIVACY_PATTERNS }}
 
   deploy:
     needs: build
