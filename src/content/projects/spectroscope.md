@@ -6,6 +6,16 @@ statusDetail: Audio Unit · VST3 · standalone macOS
 live: false
 stack: [C++, JUCE 8, CMake, OpenGL, GitHub Actions]
 repo: https://github.com/carlitoswillis/spectroscope
+gallery:
+  - src: /media/spectroscope-console-nostromo.png
+    alt: The Spectroscope console with all six instruments lit, Nostromo livery — waveform, spectrogram, spectrum, stereo field, loudness chart, and oscilloscope.
+    width: 940
+    height: 900
+  - src: /media/spectroscope-console-tva.png
+    alt: The same six-instrument console in the TVA livery, an aged-paper chassis with a burnt-orange wordmark.
+    width: 940
+    height: 900
+galleryCaption: "Four film-grade liveries share the same console — every colour and detail changes, none is a tint of another."
 summary: An audio analysis console — waveform, spectrogram, spectrum, stereo field, loudness chart, oscilloscope — that runs as an Audio Unit or VST3 inside Ableton, or as a standalone macOS app listening to an input device. It measures and never changes the audio, so it can sit anywhere in a chain.
 order: 3
 ---
