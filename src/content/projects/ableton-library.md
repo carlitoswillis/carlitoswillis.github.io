@@ -23,18 +23,18 @@ honest way in is to read the files themselves.
 
 ## What I built
 
-A Rust toolchain with two faces over one catalog: an `ableton-scan` CLI and a
-Tauri desktop app. Scanning recurses any folder structure, parses every `.als`
+A Rust toolchain over one catalog: an `ableton-scan` CLI and a Tauri desktop
+app. Scanning recurses any folder structure, parses every `.als`
 (a gzipped XML document) without touching Ableton, and indexes Live version,
 tempo, time signature, tracks, devices and plugins, referenced samples, and
-locators into SQLite with FTS5 — so the whole library answers queries like
-`search --min-bpm 140 --max-bpm 160 --plugin soothe` in milliseconds. On top of
-the catalog: waveform previews, lists and favorites, artist filing, and a 3D
+locators into SQLite with FTS5 — so a query like
+`search --min-bpm 140 --max-bpm 160 --plugin soothe` is answered by the index
+instead of by opening projects one at a time. On top of the catalog: waveform previews, lists and favorites, artist filing, and a 3D
 similarity map of every set in the library.
 
 ## The hard parts
 
-**Parsing at scale without a spec.** Real libraries contain corrupt files,
+**Parsing without a spec.** Real libraries contain corrupt files,
 version drift across a decade of Live releases, and half-missing metadata.
 Extraction is lenient by design: a missing field becomes a warning on that set,
 a corrupt file logs an error and the scan continues. One bad project never

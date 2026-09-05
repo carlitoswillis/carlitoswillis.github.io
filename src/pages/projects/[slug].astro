@@ -69,6 +69,27 @@ const d = project.data;
       )
     }
 
+    {
+      d.gallery && (
+        <div class="mx-auto max-w-2xl px-5 pt-10">
+          <div class="flex flex-col gap-4 sm:flex-row">
+            {d.gallery.map((g) => (
+              <img
+                src={g.src}
+                alt={g.alt}
+                width={g.width}
+                height={g.height}
+                loading="lazy"
+                decoding="async"
+                class="w-full max-w-[240px] rounded-md border border-line"
+              />
+            ))}
+          </div>
+          {d.galleryCaption && <p class="mt-2 text-sm text-steel">{d.galleryCaption}</p>}
+        </div>
+      )
+    }
+
     <div class="mx-auto max-w-2xl px-5 py-10">
       <div
         class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-signal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"

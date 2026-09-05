@@ -8,17 +8,24 @@ const projects = (await getCollection('projects'))
 
 const secondary = [
   {
+    name: 'OP-1 Lab',
+    tech: 'Blackfin assembly, Python, GNU bfin toolchain, op1repacker',
+    blurb:
+      'Mapping the closed Blackfin firmware of the original OP-1 synthesizer to see how it works, then writing an oscillator in assembly that runs on the hardware itself — every modification byte-verified before flashing, so the stock firmware can always be restored. The firmware work stays in a private repo; the write-up is the public artifact.',
+    links: [{ label: 'write-up', href: '/projects/op1-lab/' }],
+  },
+  {
     name: 'armak.tech',
     tech: 'Vite, EJS, Vanilla JS, HTML Canvas',
     blurb:
-      'Live production website for a Southern California low-voltage & networking firm. A static Vite + EJS build with hand-written Canvas animations — a mouse-reactive particle network and an animated SVG service-area map — lazy-loaded per viewport, a backend-less contact form, and WebP heroes tuned for a fast LCP.',
+      'Live production website for a Southern California low-voltage & networking firm. A static Vite + EJS build with hand-written Canvas animations — a mouse-reactive particle network and an animated SVG service-area map — lazy-loaded per viewport, a backend-less contact form, and WebP hero images that load early.',
     links: [{ label: 'live site', href: 'https://armak.tech' }],
   },
   {
     name: 'Incighder',
     tech: 'Next.js, TypeScript, Python, MySQL, Gemini 2.5 Flash',
     blurb:
-      'Artist-scouting tool built around a surprisingly hard question: are these accounts actually the same artist? Search-backed discovery finds candidate profiles, Gemini verifies the ambiguous ones, and patient scraping (24-hour caches, jittered backoff) turns six platforms’ metrics into growth history and one traction score.',
+      'Artist-scouting tool built around one question that turned out to be the hard part: are these accounts actually the same artist? Search-backed discovery finds candidate profiles, Gemini verifies the ambiguous ones, and patient scraping (24-hour caches, jittered backoff) turns six platforms’ metrics into growth history and one traction score.',
     links: [
       { label: 'live site', href: 'https://incighder.vercel.app' },
       { label: 'write-up', href: '/projects/incighder/' },
@@ -29,14 +36,14 @@ const secondary = [
     name: 'Beatpack',
     tech: 'Electron, React, Node.js, ffmpeg',
     blurb:
-      'Started as scripts for my own music workflow, grew into a desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art overlay, and ffmpeg-driven video assembly. One drop replaces an afternoon of manual export work.',
+      'Started as scripts for my own music workflow, grew into a desktop app that automates the release grind for beat producers: stem zipping, MP3 encoding, cover-art overlay, and ffmpeg-driven video assembly. Dropping in a folder does the export work I used to do by hand.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/beatpack' }],
   },
   {
     name: 'Expert',
     tech: 'React, Node.js, Express, JSON store (MySQL optional), WASM OCR',
     blurb:
-      'Personal-knowledge tool that makes everything you’ve read searchable by content: image-only scans are detected and run through a background WASM OCR pipeline, so even text-less PDFs join one queryable research collection — with cross-source synthesis as the next arc.',
+      'Personal-knowledge tool that makes everything you’ve read searchable by content: image-only scans are detected and run through a background WASM OCR pipeline, so even text-less PDFs join one searchable collection. Searching across sources is the next piece.',
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/expert' }],
   },
   {
@@ -62,7 +69,7 @@ const secondary = [
     <div class="mx-auto max-w-2xl px-5 pt-16 pb-14 sm:pt-20">
       <p class="font-mono text-sm text-steel">
         <span class="text-signal">$</span> currently: rewinding a task board, indexing a decade
-        of Ableton sessions, reverse-engineering a synth
+        of Ableton sessions, building an audio analysis plugin
       </p>
       <h1 class="mt-4 font-display text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl">
         I build systems that show their work.
@@ -74,11 +81,10 @@ const secondary = [
         includes working software, source code, or a write-up of how it works.
       </p>
       <p class="mt-4 max-w-xl leading-relaxed text-steel">
-        The same instinct shows up professionally too — full-stack growth
-        engineering at <span class="font-medium text-ink">Gusto</span>, nine
-        A/B tests in six months, one of them a{' '}
-        <span class="font-mono font-medium text-ink">+15.5%</span> lift in
-        conversion.
+        Before that I did full-stack growth engineering at{' '}
+        <span class="font-medium text-ink">Gusto</span>: nine A/B tests in six
+        months, one of which moved visit-to-lead conversion by{' '}
+        <span class="font-mono font-medium text-ink">15.5%</span>.
       </p>
       <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
         <a href="#projects" class="link">projects</a>
@@ -136,6 +142,26 @@ const secondary = [
                 src={p.data.video}
                 aria-label={p.data.videoAlt}
               />
+            )}
+            {p.data.gallery && (
+              <div class="mt-5">
+                <div class="flex flex-col gap-4 sm:flex-row">
+                  {p.data.gallery.map((g) => (
+                    <img
+                      src={g.src}
+                      alt={g.alt}
+                      width={g.width}
+                      height={g.height}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full max-w-[240px] rounded-md border border-line"
+                    />
+                  ))}
+                </div>
+                {p.data.galleryCaption && (
+                  <p class="mt-2 text-sm text-steel">{p.data.galleryCaption}</p>
+                )}
+              </div>
             )}
             <p class="mt-5 max-w-xl leading-relaxed text-steel">{p.data.summary}</p>
             <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">

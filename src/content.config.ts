@@ -16,6 +16,10 @@ const projects = defineCollection({
     poster: z.string().optional(),
     videoAlt: z.string().optional(),
     videoControls: z.boolean().default(false),
+    gallery: z
+      .array(z.object({ src: z.string(), alt: z.string(), width: z.number(), height: z.number() }))
+      .optional(),
+    galleryCaption: z.string().optional(),
     summary: z.string(),
     order: z.number(),
     featured: z.boolean().default(true),

@@ -7,7 +7,7 @@ live: true
 stack: [Next.js, TypeScript, Python, Flask, MySQL, Gemini 2.5 Flash]
 demo: https://incighder.vercel.app
 repo: https://github.com/carlitoswillis/incighder
-summary: An artist-scouting tool built around a surprisingly hard question — are these accounts actually the same artist? Search-backed discovery finds candidate profiles across six platforms, Gemini verifies the ambiguous ones, and patient scraping turns the metrics into growth history and a single cross-platform traction score.
+summary: An artist-scouting tool built around one question that turned out to be the hard part — are these accounts actually the same artist? Search-backed discovery finds candidate profiles across six platforms, Gemini verifies the ambiguous ones, and patient scraping turns the metrics into growth history and a single cross-platform traction score.
 order: 4
 featured: false
 ---
@@ -59,13 +59,13 @@ blocks the others — every scraper is best-effort and isolated, because
 scraping is fragile by nature and pretending otherwise just breaks the whole
 pull.
 
-## The deploy is the interesting part
+## How the deploy works
 
 The frontend lives on Vercel and reads a hosted MySQL database, so browsing is
 always up. But scraping from a datacenter IP is a losing game — so the data
 API runs on my Mac, on a residential connection, and exposes itself through a
-throwaway Cloudflare tunnel. The twist: the tunnel URL is **published into the
-shared database**, and the deployed frontend looks it up at request time. Going
-live is one command on my laptop; no redeploy, ever. When the tunnel is down,
+throwaway Cloudflare tunnel. The tunnel URL is **published into the
+shared database**, and the deployed frontend looks it up at request time — so
+bringing it up is one command on my laptop, and never a redeploy. When the tunnel is down,
 the site degrades honestly — an amber banner says live scraping is offline,
 and everything already collected keeps working.
