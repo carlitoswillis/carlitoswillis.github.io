@@ -29,7 +29,7 @@ const experience = [
     location: 'Los Angeles, CA',
     dates: 'Oct 2021 – Oct 2023',
     bullets: [
-      'Designed and executed dozens of A/B tests with React, TypeScript, and Ruby — nine in just six months, achieving a 15.5% increase in Visit-to-Lead Conversion Rate (CvR) and a 5.8% year-over-year increase in Direct 30-day Lead-to-Join CvR.',
+      'Designed and executed nine A/B tests in six months with React, TypeScript, and Ruby, achieving a 15.5% increase in Visit-to-Lead Conversion Rate (CvR) and a 5.8% year-over-year increase in Direct 30-day Lead-to-Join CvR.',
       'Led the redesign of the experiment tracker and setup process, significantly cutting setup time by 40–60% and increasing process transparency.',
       'Developed an in-house testing hub, reducing experiment-sharing setup from an hour to 5 minutes.',
     ],
@@ -63,7 +63,7 @@ const projects = [
     tech: 'Next.js, TypeScript, React, SQLite, Litestream, Backblaze B2, Docker, dnd-kit, Tailwind',
     bullets: [
       'Built an append-only, event-sourced task board where every edit, move, and completion appends to an item_events log via SQLite triggers — making the board’s full state reconstructable at any past point in time, with multi-account isolation enforced at the query layer.',
-      'Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot, backed by daily automated pulls and an uptime worker that eliminates cold-start churn.',
+      'Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot, backed by daily automated pulls and an uptime worker that tames free-tier cold starts.',
     ],
   },
   {
@@ -90,7 +90,7 @@ const projects = [
     href: 'https://armak.tech',
     tech: 'Vite, EJS, Vanilla JS, HTML Canvas, Web3Forms',
     bullets: [
-      'Built and shipped the live production site for a real business: a static Vite + EJS build with hand-written HTML Canvas animations (a mouse-reactive particle network, an animated SVG service-area map) lazy-loaded per viewport via IntersectionObserver, a backend-less Web3Forms contact form, and full Open Graph / Twitter SEO metadata — cutting Largest Contentful Paint ~90% by serving WebP heroes with preload and fetchpriority.',
+      'Built and shipped the live production site for a real business: a static Vite + EJS build with hand-written HTML Canvas animations (a mouse-reactive particle network, an animated SVG service-area map) lazy-loaded per viewport via IntersectionObserver, a backend-less Web3Forms contact form, and full Open Graph / Twitter SEO metadata — cutting hero image payload ~90% (two 2.84 MB PNGs deleted; a 1.27 MB image down to 160 KB) by serving WebP heroes with preload and fetchpriority.',
     ],
   },
   {
