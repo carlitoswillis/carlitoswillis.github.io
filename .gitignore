@@ -26,3 +26,10 @@ ai/
 
 # jetbrains setting folder
 .idea/
+
+# OpenWiki output — generated, deliberately untracked. It paraphrases internals
+# (including, at times, the guarded patterns themselves) and goes stale, so it
+# is regenerated, never committed.
+openwiki/
+/AGENTS.md
+/CLAUDE.md
