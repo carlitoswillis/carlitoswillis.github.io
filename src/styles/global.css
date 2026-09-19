@@ -2,19 +2,35 @@
 @import "@fontsource/space-grotesk/latin-500.css";
 @import "@fontsource/space-grotesk/latin-700.css";
 @import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-400-italic.css";
 @import "@fontsource/ibm-plex-sans/latin-500.css";
 @import "@fontsource/ibm-plex-sans/latin-600.css";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
 @import "@fontsource/ibm-plex-mono/latin-500.css";
 
-@plugin "@tailwindcss/typography";
+/* ============================================================
+   SYSTEM — "instrument": the record, set as a numbered logbook.
+   Every measurement, date, status and index number is mono;
+   the page's structure IS that index.
+
+   type   ratio 1.25 from base 17px, plus a hand-set display
+          13 / 15 / 17 / 21 / 26 / 40 / clamp(44 → 92)
+   space  unit 8px; ladder 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128
+   grid   live 1120 · rail 120 + gutter 32 + content 872 (≥1024px)
+          text measure capped at 576px (68ch) — the evidence is wider
+          than its own description, which is the one grid break here
+          that carries meaning.
+   color  ground / ink / steel / rule / line / signal.
+          signal is spent on four jobs only: the $ prompt, section
+          labels, the live dot, and links. Never down the spine.
+   ============================================================ */
 
 @theme {
-  /* warm paper ground, confident ink, one hyperlink blue */
   --color-ground: #faf9f6;
   --color-panel: #f2f1eb;
   --color-ink: #181815;
   --color-steel: #68655d;
+  --color-rule: #cbc8bb;
   --color-line: #e3e1d8;
   --color-signal: #1d4ed8;
 
@@ -23,11 +39,43 @@
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 }
 
+:root {
+  --t-micro: 0.8125rem;
+  --t-small: 0.9375rem;
+  --t-body: 1.0625rem;
+  --t-lead: 1.3125rem;
+  --t-section: 1.625rem;
+  --t-title: 2.5rem;
+  --t-display: clamp(2.75rem, 7.2vw, 5.75rem);
+
+  --rail: 0rem;
+  --gutter: 0rem;
+  --edge: 1.25rem;
+  --live: 70rem;
+  --measure: 36rem;
+  --measure-small: 32rem;
+  --measure-micro: 28rem;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --rail: 7.5rem;
+    --gutter: 2rem;
+    --edge: 3rem;
+  }
+}
+
 html {
   background: var(--color-ground);
   color: var(--color-ink);
   font-family: var(--font-body);
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-size: var(--t-body);
+  line-height: 1.62;
 }
 
 ::selection {
@@ -35,36 +83,358 @@ html {
   color: #fff;
 }
 
+/* The ring is two-tone on purpose: a ground-coloured inner band under a
+   signal outline, so it reads at 6.37:1 whether it lands on the page, on a
+   panel, or on the dark first frame of a demo video. */
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+video:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 2px solid var(--color-signal);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-ground);
+  border-radius: 1px;
 }
 
-/* obviously-a-link: blue + underline, everywhere a link goes somewhere */
+/* ---------- grid ---------------------------------------------------- */
+
+.wrap {
+  max-width: var(--live);
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+
+/* Phone: one column — the rail's facts stack above their entry as a
+   horizontal readout. Desktop: rail + content, with ONE hairline drawn
+   down the gutter by `.spine`. Contiguous rows make it unbroken. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Phone: the signature is translated, not deleted. The hairline moves to the
+   outer edge and the entry numbers march down just inside it, the way a
+   printed ledger rules its left margin on a narrow page. */
+.spine > * {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.spine > *::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--color-rule);
+}
+
+@media (min-width: 64rem) {
+  .row {
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--gutter);
+  }
+
+  .spine > * {
+    padding-left: 0;
+  }
+  .spine > *::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--rail) + var(--gutter) / 2);
+    width: 1px;
+    background: var(--color-rule);
+  }
+
+  .rail-sticky {
+    position: sticky;
+    top: 2.5rem;
+    align-self: start;
+  }
+}
+
+/* The cap is ~68 characters, not a fixed pixel width, so each tier gets its
+   own column: 17px body 576px, 15px small 512px, 13px mono 448px. */
+.measure {
+  max-width: var(--measure);
+}
+.small.measure,
+.measure .small,
+.measure ul,
+.measure dl {
+  max-width: var(--measure-small);
+}
+.measure-small {
+  max-width: var(--measure-small);
+}
+.measure-micro {
+  max-width: var(--measure-micro);
+}
+
+/* ---------- type ---------------------------------------------------- */
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* mono caps label — the résumé's section-label habit, made structural */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-signal);
+}
+
+.idx {
+  font-family: var(--font-mono);
+  font-size: var(--t-lead);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-display);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-title);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+.section-h {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-section);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  font-size: var(--t-lead);
+  line-height: 1.5;
+}
+
+.small {
+  font-size: var(--t-small);
+  line-height: 1.6;
+}
+
+/* the status prompt breaks on its own width, not the content column's */
+.prompt {
+  max-width: 46rem;
+}
+
+/* measured facts inside running prose get the mono treatment */
+.fig {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.94em;
+  color: var(--color-ink);
+}
+
+/* ---------- links --------------------------------------------------- */
+
 .link {
   color: var(--color-signal);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .link:hover {
-  opacity: 0.7;
+  text-decoration-thickness: 2px;
 }
 
-/* status dot for LIVE records */
+.title-link {
+  color: inherit;
+  text-decoration: none;
+}
+.title-link:hover {
+  color: var(--color-signal);
+}
+
+/* an action row reads as a row of switches, not a sentence */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* touch: 13px mono is a 20px tap target, so pad the row's links to ~40px
+   and take the added height back out of the row gap. */
+@media (hover: none) and (pointer: coarse) {
+  .actions {
+    gap: 0 1.25rem;
+  }
+  .actions a {
+    display: inline-block;
+    padding-block: 0.5rem;
+  }
+}
+
+/* ---------- evidence ------------------------------------------------ */
+
+.evidence {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--color-rule);
+  background: var(--color-panel);
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  line-height: 1.6;
+  color: var(--color-steel);
+  max-width: var(--measure-micro);
+}
+
+/* ---------- status -------------------------------------------------- */
+
 .dot-live {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--color-signal);
   animation: dot-pulse 2.4s ease-in-out infinite;
 }
 @keyframes dot-pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  50% { opacity: 0.3; }
 }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .dot-live { animation: none; }
+  /* CSS can't pause an autoplaying <video>; the demo videos carry a native
+     `controls` attribute instead so a reduced-motion visitor can stop them. */
 }
+
+/* The content spine's hairline ends at the last row of its own section, one
+   `mt-24` + border above the footer. Continue it through that gap so it
+   reaches the END row instead of stopping short. */
+.spine-tail {
+  position: relative;
+}
+.spine-tail::before {
+  content: "";
+  position: absolute;
+  top: -6rem;
+  bottom: 0;
+  left: var(--edge);
+  width: 1px;
+  background: var(--color-rule);
+}
+@media (min-width: 64rem) {
+  .spine-tail::before {
+    left: calc(var(--edge) + var(--rail) + var(--gutter) / 2);
+  }
+}
+@media print {
+  .spine-tail::before { display: none; }
+}
+
+/* ---------- case-study prose --------------------------------------- */
+
+.copy {
+  max-width: var(--measure);
+}
+.copy p,
+.copy ul,
+.copy ol {
+  margin-block: 1.5rem;
+}
+.copy h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-section);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+.copy h3 {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--t-micro);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-signal);
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+}
+.copy > :first-child {
+  margin-top: 0;
+}
+.copy a {
+  color: var(--color-signal);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.copy strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.copy code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-panel);
+  padding: 0.1em 0.3em;
+}
+.copy ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+.copy ul > li {
+  position: relative;
+}
+.copy ul > li::before {
+  content: "—";
+  position: absolute;
+  left: -1.5rem;
+  color: var(--color-rule);
+}
+.copy li + li {
+  margin-top: 0.5rem;
+}
+.copy blockquote {
+  border-left: 2px solid var(--color-rule);
+  padding-left: 1.5rem;
+  margin-block: 1.5rem;
+  color: var(--color-steel);
+}
+
+/* ---------- print --------------------------------------------------- */
 
 @media print {
   .no-print { display: none !important; }
-  html { background: #fff; }
+  html { background: #fff; font-size: 10pt; }
+  .spine > * { padding-left: 0; }
+  .spine > *::before { display: none; }
+  .rail-sticky { position: static; }
+  a { color: #000; }
 }

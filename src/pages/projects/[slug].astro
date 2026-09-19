@@ -10,91 +10,103 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const d = project.data;
+const index = String(d.order).padStart(2, '0');
+const hasLinks = Boolean(d.demo || d.repo);
+const portraitGallery = d.gallery?.every((g) => g.height > g.width) ?? false;
 ---
 
 <Base title={`${d.title} — Carlitos Willis`} description={d.summary}>
-  <article>
-    <header class="border-b border-line">
-      <div class="mx-auto max-w-2xl px-5 pt-12 pb-10">
-        <a href="/#projects" class="link text-sm">← all projects</a>
-        <h1 class="mt-4 font-display text-4xl font-bold tracking-tight sm:text-5xl">
-          {d.title}
-        </h1>
-        <p class="mt-3 text-steel lowercase">
-          {d.domain}
-          {d.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
-          {' · '}{d.status} — {d.statusDetail}
-        </p>
-        <p class="mt-3 text-sm text-steel">{d.stack.join(' · ')}</p>
-        <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          {d.demo && <a href={d.demo} class="link" target="_blank" rel="noopener noreferrer">live demo</a>}
-          {d.repo && <a href={d.repo} class="link" target="_blank" rel="noopener noreferrer">repo</a>}
-        </div>
+  <article class="wrap spine">
+    <!-- ========== HEAD: the entry's own readout ========== -->
+    <div class="row pt-10 pb-6">
+      <p class="idx" aria-hidden="true">{index}</p>
+      <div>
+        <a href="/#record" class="actions"><span class="link">&larr; the record</span></a>
+        <h1 class="display mt-5">{d.title}</h1>
       </div>
-    </header>
+    </div>
 
-    {
-      d.video && d.videoControls && (
-        <div class="mx-auto max-w-2xl px-5 pt-10">
-          <video
-            class="w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
-            controls
-            playsinline
-            preload="metadata"
-            poster={d.poster}
-            src={d.video}
-            aria-label={d.videoAlt}
-          />
-        </div>
-      )
-    }
-    {
-      d.video && !d.videoControls && (
-        <div class="mx-auto max-w-2xl px-5 pt-10">
-          <video
-            class="w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster={d.poster}
-            src={d.video}
-            aria-label={d.videoAlt}
-          />
-          <p class="mt-2 text-sm text-steel">
-            The live demo, rewound: dragging the scrubber re-renders the board as it was.
+    <div class="row border-t border-rule pt-6 pb-16">
+      <!-- RAIL: status, domain, stack, links — the whole spec column -->
+      <aside class="rail-sticky pb-6 lg:pb-0" aria-label="Specifications">
+        <div class="mono flex flex-wrap gap-x-4 gap-y-1 lg:block lg:space-y-2">
+          <p class="font-medium text-ink uppercase">
+            {d.status}
+            {d.live && <span class="dot-live ml-1.5 align-middle" />}
           </p>
+          {d.domain.split('·').map((part) => <p class="text-steel uppercase">{part.trim()}</p>)}
         </div>
-      )
-    }
-
-    {
-      d.gallery && (
-        <div class="mx-auto max-w-2xl px-5 pt-10">
-          <div class="flex flex-col gap-4 sm:flex-row">
-            {d.gallery.map((g) => (
-              <img
-                src={g.src}
-                alt={g.alt}
-                width={g.width}
-                height={g.height}
-                loading="lazy"
-                decoding="async"
-                class="w-full max-w-[240px] rounded-md border border-line"
-              />
-            ))}
+        <div class="mono mt-4 space-y-1 border-t border-line pt-4 text-steel lg:mt-6 lg:pt-5">
+          {d.stack.map((s) => <p>{s}</p>)}
+        </div>
+        {hasLinks && (
+          <div class="actions mt-5 border-t border-line pt-4 lg:mt-6 lg:flex-col lg:gap-2 lg:pt-5">
+            {d.demo && (
+              <a href={d.demo} class="link" target="_blank" rel="noopener noreferrer">
+                live demo
+              </a>
+            )}
+            {d.repo && (
+              <a href={d.repo} class="link" target="_blank" rel="noopener noreferrer">
+                repo
+              </a>
+            )}
           </div>
-          {d.galleryCaption && <p class="mt-2 text-sm text-steel">{d.galleryCaption}</p>}
-        </div>
-      )
-    }
+        )}
+      </aside>
 
-    <div class="mx-auto max-w-2xl px-5 py-10">
-      <div
-        class="prose prose-neutral max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight prose-a:text-signal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-strong:text-ink prose-code:font-mono prose-p:text-ink/85 prose-li:text-ink/85"
-      >
-        <Content />
+      <div class="col">
+        <p class="lede measure">{d.summary}</p>
+
+        {/* EVIDENCE first — it is the argument, the prose is the footnote */}
+        {
+          d.video && (
+            <figure class="mt-10">
+              <video
+                class="evidence"
+                controls
+                autoplay={!d.videoControls || undefined}
+                muted={!d.videoControls || undefined}
+                loop={!d.videoControls || undefined}
+                playsinline
+                preload="metadata"
+                poster={d.poster}
+                src={d.video}
+                aria-label={d.videoAlt}
+              />
+              {!d.videoControls && (
+                <figcaption class="caption mt-3">
+                  The live demo, rewound: dragging the scrubber re-renders the board as it was.
+                </figcaption>
+              )}
+            </figure>
+          )
+        }
+
+        {
+          d.gallery && (
+            <figure class="mt-10">
+              <div class:list={['grid grid-cols-1 gap-5 md:grid-cols-2', portraitGallery && 'measure']}>
+                {d.gallery.map((g) => (
+                  <img
+                    src={g.src}
+                    alt={g.alt}
+                    width={g.width}
+                    height={g.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="evidence"
+                  />
+                ))}
+              </div>
+              {d.galleryCaption && <figcaption class="caption mt-3">{d.galleryCaption}</figcaption>}
+            </figure>
+          )
+        }
+
+        <div class="copy mt-16">
+          <Content />
+        </div>
       </div>
     </div>
   </article>

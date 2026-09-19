@@ -86,54 +86,113 @@ const secondary = [
     links: [{ label: 'repo', href: 'https://github.com/carlitoswillis/deckhand' }],
   },
 ];
+
+/* The hero's measured fact is counted from the record itself, never asserted. */
+const entries = projects.length + secondary.length;
+const withSource =
+  projects.filter((p) => p.data.repo).length +
+  secondary.filter((s) => s.links.some((l) => l.label === 'repo')).length;
+const openNow =
+  projects.filter((p) => p.data.demo).length +
+  secondary.filter((s) => s.links.some((l) => l.label === 'live site')).length;
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/* Portrait screenshots sit at text measure; landscape stills fill the full
+   evidence width. The shape of the picture decides, not a fixed cap. */
+const isPortrait = (g: { width: number; height: number }[]) =>
+  g.every((x) => x.height > x.width);
 ---
 
 <Base
   title="Carlitos Willis — Software Engineer"
   description="Software engineer in Los Angeles. Projects that start with a question worth chasing — event sourcing, reverse-engineered synthesizer firmware, developer tools for music — each with working software, source code, or a technical write-up."
 >
-  <!-- Hero -->
-  <section class="border-b border-line">
-    <div class="mx-auto max-w-2xl px-5 pt-16 pb-14 sm:pt-20">
-      <p class="font-mono text-sm text-steel">
-        <span class="text-signal">$</span> currently: rewinding a task board, indexing a decade
-        of Ableton sessions, building an audio analysis plugin
-      </p>
-      <h1 class="mt-4 font-display text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl">
-        I build systems that show their work.
-      </h1>
-      <p class="mt-5 max-w-xl leading-relaxed text-steel">
-        Most of my projects start with a question I can't let go. Lately that's
-        led me to event sourcing, reverse-engineering an old synthesizer, and
-        building developer tools for my own music workflow. Every project here
-        includes working software, source code, or a write-up of how it works.
-      </p>
-      <p class="mt-4 max-w-xl leading-relaxed text-steel">
-        Before that I did full-stack growth engineering at{' '}
-        <span class="font-medium text-ink">Gusto</span>: nine A/B tests in six
-        months, one of which moved visit-to-lead conversion by{' '}
-        <span class="font-mono font-medium text-ink">15.5%</span>.
-      </p>
-      <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-        <a href="#projects" class="link">projects</a>
-        <a href="/resume/" class="link" target="_blank" rel="noopener noreferrer">resume</a>
-        <a href="https://github.com/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">github</a>
-        <a href="https://linkedin.com/in/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">linkedin</a>
-        <a href="mailto:carlitoswillis@berkeley.edu" class="link">email</a>
+  <!-- ========== HERO: one sentence, one measured fact ========== -->
+  <section class="wrap">
+    <div class="row pt-14 pb-16 sm:pt-20 sm:pb-24">
+      <p class="idx hidden lg:block lg:self-end" aria-hidden="true">00</p>
+      <div>
+        <p class="mono small prompt text-steel">
+          <span class="text-signal">$</span> currently: rewinding a task board, indexing a decade
+          of Ableton sessions, building an audio analysis plugin
+        </p>
+        <h1 class="display mt-6">I build systems that show their work.</h1>
+
+        <div class="measure mt-10">
+          <p class="lede">
+            Most of my projects start with a question I can't let go. Lately that's led me to
+            event sourcing, reverse-engineering an old synthesizer, and building developer tools
+            for my own music workflow. Every project here includes working software, source code,
+            or a write-up of how it works.
+          </p>
+          <p class="small measure-small mt-5 text-steel">
+            Before that I did full-stack growth engineering at{' '}
+            <span class="font-semibold text-ink">Gusto</span>: nine A/B tests in six months, one
+            of which moved visit-to-lead conversion by <span class="fig">15.5%</span>.
+          </p>
+        </div>
+
+        <div class="actions mt-8">
+          <a href="#record" class="link">projects</a>
+          <a href="/resume/" class="link" target="_blank" rel="noopener noreferrer">resume</a>
+          <a
+            href="https://github.com/carlitoswillis"
+            class="link"
+            target="_blank"
+            rel="noopener noreferrer">github</a
+          >
+          <a
+            href="https://linkedin.com/in/carlitoswillis"
+            class="link"
+            target="_blank"
+            rel="noopener noreferrer">linkedin</a
+          >
+          <a href="mailto:carlitoswillis@berkeley.edu" class="link">email</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured projects -->
-  <section id="projects" aria-label="Featured projects">
+  <!-- ========== THE RECORD: the spine starts here ========== -->
+  <section id="record" class="wrap spine" aria-labelledby="record-h">
+    <!-- section head sits on the spine's first row -->
+    <div class="row border-t border-rule pt-4 pb-8">
+      <p class="idx" aria-hidden="true">&nbsp;</p>
+      <div class="col flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h2 id="record-h" class="eyebrow"><span id="projects"></span>The record</h2>
+        <p class="mono text-steel uppercase">
+          {pad(entries)} entries &middot; {pad(withSource)} with public source &middot; {
+            pad(openNow)
+          } running now
+        </p>
+      </div>
+    </div>
+
     {
-      projects.map((p) => (
-        <article class="border-b border-line">
-          <div class="mx-auto max-w-3xl px-5 py-12">
-            <p class="text-sm text-steel lowercase">
-              {p.data.domain}
-              {p.data.live && <span class="dot-live ml-2 inline-block h-1.5 w-1.5 rounded-full bg-signal align-middle" />}
-              {' · '}
+      projects.map((p, i) => (
+        <article class="row border-t border-rule pt-6 pb-20">
+          <!-- RAIL: index, status, domain — every fact in mono -->
+          <div class="pb-4 lg:pb-0">
+            <p class="idx" aria-hidden="true">{pad(i + 1)}</p>
+            <div class="mono mt-2 flex flex-wrap gap-x-4 lg:mt-6 lg:block lg:space-y-2">
+              <p class="font-medium text-ink uppercase">
+                {p.data.status}
+                {p.data.live && <span class="dot-live ml-1.5 align-middle" />}
+              </p>
+              {p.data.domain.split('·').map((d) => (
+                <p class="text-steel uppercase">{d.trim()}</p>
+              ))}
+            </div>
+          </div>
+
+          <div class="col">
+            <h3 class="title">
+              <a href={`/projects/${p.id}/`} class="title-link">
+                {p.data.title}
+              </a>
+            </h3>
+            <p class="mono mt-3 text-steel">
               {p.data.demo ? (
                 <a href={p.data.demo} class="link" target="_blank" rel="noopener noreferrer">
                   {p.data.statusDetail}
@@ -141,29 +200,18 @@ const secondary = [
               ) : (
                 p.data.statusDetail
               )}
+              {' · '}
+              {p.data.stack.join(' · ')}
             </p>
-            <h2 class="mt-2 font-display text-3xl font-bold tracking-tight">
-              <a href={`/projects/${p.id}/`} class="hover:text-signal">
-                {p.data.title}
-              </a>
-            </h2>
-            {p.data.video && p.data.videoControls && (
+
+            {/* EVIDENCE — wider than its own description, on purpose */}
+            {p.data.video && (
               <video
-                class="mt-5 w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
+                class="evidence mt-8"
                 controls
-                playsinline
-                preload="metadata"
-                poster={p.data.poster}
-                src={p.data.video}
-                aria-label={p.data.videoAlt}
-              />
-            )}
-            {p.data.video && !p.data.videoControls && (
-              <video
-                class="mt-5 w-full rounded-md border border-line shadow-[0_1px_2px_rgba(24,24,21,0.04),0_8px_24px_-8px_rgba(24,24,21,0.15)]"
-                autoplay
-                muted
-                loop
+                autoplay={!p.data.videoControls || undefined}
+                muted={!p.data.videoControls || undefined}
+                loop={!p.data.videoControls || undefined}
                 playsinline
                 preload="metadata"
                 poster={p.data.poster}
@@ -172,27 +220,30 @@ const secondary = [
               />
             )}
             {p.data.gallery && (
-              <div class="mt-5">
-                <div class="flex flex-col gap-4 sm:flex-row">
-                  {p.data.gallery.map((g) => (
-                    <img
-                      src={g.src}
-                      alt={g.alt}
-                      width={g.width}
-                      height={g.height}
-                      loading="lazy"
-                      decoding="async"
-                      class="w-full max-w-[240px] rounded-md border border-line"
-                    />
-                  ))}
-                </div>
-                {p.data.galleryCaption && (
-                  <p class="mt-2 text-sm text-steel">{p.data.galleryCaption}</p>
-                )}
+              <div
+                class:list={[
+                  'mt-8 grid grid-cols-1 gap-5 md:grid-cols-2',
+                  isPortrait(p.data.gallery) && 'measure',
+                ]}
+              >
+                {p.data.gallery.map((g) => (
+                  <img
+                    src={g.src}
+                    alt={g.alt}
+                    width={g.width}
+                    height={g.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="evidence"
+                  />
+                ))}
               </div>
             )}
-            <p class="mt-5 max-w-xl leading-relaxed text-steel">{p.data.summary}</p>
-            <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {p.data.galleryCaption && <p class="caption mt-3">{p.data.galleryCaption}</p>}
+
+            <p class="measure mt-8">{p.data.summary}</p>
+
+            <div class="actions mt-6">
               {p.data.demo && (
                 <a href={p.data.demo} class="link" target="_blank" rel="noopener noreferrer">
                   live demo
@@ -211,48 +262,53 @@ const secondary = [
         </article>
       ))
     }
-  </section>
 
-  <!-- Secondary list -->
-  <section aria-label="More projects">
-    <div class="mx-auto max-w-2xl px-5 py-12">
-      <p class="text-steel">Other projects</p>
-      <div class="mt-4 divide-y divide-line">
-        {
-          secondary.map((s) => (
-            <div class="py-6 first:pt-0">
-              <h3 class="font-display font-medium">{s.name}</h3>
-              <p class="mt-1 text-sm text-steel">{s.tech}</p>
-              {s.metrics && (
-                <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1">
-                  {s.metrics.map((m) => (
-                    <p class="font-mono text-sm font-medium text-ink">
-                      {m.value} <span class="text-steel">{m.unit}</span>
-                    </p>
-                  ))}
-                </div>
-              )}
-              <p class="mt-2 leading-relaxed text-steel">{s.blurb}</p>
-              <div class="mt-3 flex gap-5 text-sm">
-                {s.links.length ? (
-                  s.links.map((l) => (
-                    <a
-                      href={l.href}
-                      class="link"
-                      target={l.href.startsWith('http') ? '_blank' : undefined}
-                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    >
-                      {l.label}
-                    </a>
-                  ))
-                ) : (
-                  <span class="text-steel">write-up on request</span>
-                )}
-              </div>
-            </div>
-          ))
-        }
+    <!-- ========== THE LEDGER: same spine, different density ========== -->
+    <div class="row border-t border-rule pt-4 pb-8">
+      <p class="idx" aria-hidden="true">&nbsp;</p>
+      <div class="col">
+        <h2 class="eyebrow">Other projects</h2>
       </div>
     </div>
+
+    {
+      secondary.map((s, i) => (
+        <div class="row border-t border-line py-6">
+          <div class="pb-2 lg:pb-0">
+            <p class="idx" aria-hidden="true">{pad(projects.length + i + 1)}</p>
+          </div>
+          <div class="col">
+            <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <h3 class="section-h">{s.name}</h3>
+              {s.metrics &&
+                s.metrics.map((m) => (
+                  <p class="mono">
+                    <span class="fig">{m.value}</span>{' '}
+                    <span class="text-steel">{m.unit}</span>
+                  </p>
+                ))}
+            </div>
+            <p class="mono mt-2 text-steel">{s.tech}</p>
+            <p class="small measure mt-3 text-steel">{s.blurb}</p>
+            <div class="actions mt-4">
+              {s.links.length ? (
+                s.links.map((l) => (
+                  <a
+                    href={l.href}
+                    class="link"
+                    target={l.href.startsWith('http') ? '_blank' : undefined}
+                    rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
+                    {l.label}
+                  </a>
+                ))
+              ) : (
+                <span class="text-steel">write-up on request</span>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
   </section>
 </Base>
