@@ -428,56 +428,57 @@ summary:focus-visible,
   color: var(--color-steel);
 }
 
-/* ---------- print --------------------------------------------------- */
-
 /* ---------- print ----------------------------------------------------
-   The résumé page prints as a sober document in the PDF résumé's shape:
-   white ground, black ink, a compact scale, the full measure, section
-   labels in a narrow left rail, no spine, no nav, no footer. Browsers use
-   this when the visitor hits Print on /resume/ ("Printable" is a promise). */
+   /resume/ prints in the shape of the generated résumé PDF (the file the
+   "download PDF" link serves), so print and download give the same document:
+   one column, the name/title lockup, mono contact, blue tracked section labels
+   with a hairline running out to the right, dates on one right axis. White
+   ground for paper; the screen's spine, rail, nav and footer do not print. */
 @media print {
+  @page { size: Letter; margin: 0.45in 0.6in 0.5in; }
   .no-print { display: none !important; }
-  html { background: #fff !important; font-size: 10pt; }
-  body { color: #000; }
+  html { background: #fff !important; font-size: 9.4pt; }
+  body { color: #181815; }
   .wrap { max-width: none; padding-inline: 0; }
   .spine > * { padding-left: 0; }
   .spine > *::before,
   .spine-tail::before { display: none; }
   .rail-sticky { position: static; }
-  a { color: #000; text-decoration: none; }
   .idx { display: none; }
+  a, .link, .title-link { color: #181815 !important; text-decoration: none !important; }
 
-  /* two columns everywhere: a narrow label rail, then the record */
-  .row { grid-template-columns: 6.25rem minmax(0, 1fr) !important; column-gap: 1rem; }
+  /* one column: the label sits above its section like the PDF's rule row */
+  .row { display: block !important; }
   .measure, .measure-small, .small.measure, .measure .small, .measure ul, .measure dl,
   .small.measure-small, ul.measure-small, dl.measure-small, .section-h.measure-small {
     max-width: none !important;
   }
 
-  /* the scale, in points */
-  .display { font-size: 21pt; line-height: 1; letter-spacing: -0.03em; }
-  .section-h { font-size: 10.5pt; line-height: 1.2; }
-  .eyebrow { font-size: 7pt; color: #000; letter-spacing: 0.12em; }
-  .small { font-size: 9.2pt; line-height: 1.32; }
-  .mono { font-size: 7.2pt; line-height: 1.3; }
-  .caption { font-size: 7.2pt; }
-  .text-steel { color: #444 !important; }
-  .border-rule { border-color: #bbb !important; }
+  /* masthead */
+  header.row { padding: 0 0 4pt !important; }
+  .display { font-family: var(--font-display); font-size: 24pt; line-height: 1.05; letter-spacing: -0.5pt; }
+  header .mono.uppercase { text-transform: none; font-size: 10.8pt; font-family: var(--font-display); font-weight: 500; color: #181815; letter-spacing: 0; margin-top: 1pt !important; }
+  header .actions { margin-top: 5pt !important; gap: 0 9pt !important; }
+  header .actions a { font-family: var(--font-mono); font-size: 7.8pt; color: #75716a !important; padding: 0 !important; }
 
-  /* rhythm: every gap a fraction of what the screen needs */
-  /* the masthead spans the page: with the CV ordinal hidden, the name would
-     otherwise fall into the narrow rail column */
-  header.row { grid-template-columns: minmax(0, 1fr) !important; padding-top: 0 !important; padding-bottom: 7pt !important; }
-  .link, .title-link { color: #000 !important; text-decoration: none !important; }
-  section.row { padding-top: 5pt !important; padding-bottom: 7pt !important; }
-  .mt-1 { margin-top: 1pt !important; }
-  .mt-3 { margin-top: 2pt !important; }
-  .mt-4, .mt-5 { margin-top: 3pt !important; }
-  .space-y-2 > :not(:last-child) { margin-block-end: 1.5pt !important; }
+  /* section label: blue tracked caps with the hairline riding its own line */
+  section.row { padding: 8pt 0 0 !important; border-top: 0 !important; }
+  .eyebrow { display: flex; align-items: center; gap: 6pt; font-size: 7.5pt; letter-spacing: 0.7pt; color: #1d4ed8; margin-bottom: 3pt; }
+  .eyebrow::after { content: ""; flex: 1; border-top: 0.7pt solid #c4c0b3; }
+
+  /* records */
+  .section-h { font-family: var(--font-body); font-weight: 600; font-size: 9.4pt; line-height: 1.25; letter-spacing: 0; }
+  .section-h .text-steel { font-weight: 400; }
+  .small { font-size: 9.4pt; line-height: 1.22; }
+  .mono { font-size: 7.8pt; line-height: 1.3; }
+  .text-steel { color: #75716a !important; }
+  .mt-1 { margin-top: 0 !important; }
+  .mt-3 { margin-top: 1.5pt !important; }
+  .space-y-2 > :not(:last-child) { margin-block-end: 1.2pt !important; }
   .space-y-8 > :not(:last-child),
-  .space-y-9 > :not(:last-child) { margin-block-end: 5pt !important; }
-  .actions { gap: 0 10pt !important; }
-  .actions a { padding: 0 !important; }
+  .space-y-9 > :not(:last-child) { margin-block-end: 4.5pt !important; }
+  li.relative { padding-left: 11pt !important; }
+  li.relative::before { content: "\2022" !important; color: #a8a49a; }
 
   h2, h3 { break-after: avoid; }
   section.row > div > div, section.row > ul > li { break-inside: avoid; }
