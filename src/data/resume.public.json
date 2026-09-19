@@ -1,0 +1,149 @@
+{
+  "name": "Carlitos Willis",
+  "label": "Software Engineer 2026 Resume",
+  "title": "Full-Stack & Growth Engineer",
+  "competencies": [
+    "A/B Testing & Experimentation",
+    "React & TypeScript",
+    "Data Pipelines & Web Scraping",
+    "Internal Tooling & Automation",
+    "Cloud Deployment (AWS, Docker, Nginx)",
+    "AI-Assisted Development (Claude)"
+  ],
+  "contact": {
+    "location": "Los Angeles, CA",
+    "email": "carlitoswillis@berkeley.edu",
+    "linkedin": "linkedin.com/in/carlitoswillis",
+    "github": "github.com/carlitoswillis",
+    "website": "https://carlitoswillis.github.io/"
+  },
+  "skills": [
+    {
+      "label": "Languages",
+      "items": "JavaScript (ES5/ES6), CSS3, HTML5, Ruby, TypeScript, Python, Rust, SQL"
+    },
+    {
+      "label": "Technologies & Frameworks",
+      "items": "React, Next.js, Ruby on Rails, Node, Express, Amplitude, Optimizely, Selenium, Playwright, Jest, Postgres, MySQL, SQLite, Mongo, AWS CLI/EC2, Docker, Vercel, Render, Git, GitHub Actions, Webpack, Styled-Components, Datadog, Postman, MCP, Claude"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Independent Software Engineer & Consultant",
+      "org": "",
+      "location": "Los Angeles, CA",
+      "dates": "November 2023 – Present",
+      "bullets": [
+        "Built data aggregation tools in Python and Node.js to track audience growth and engagement across Spotify, TikTok, and YouTube, consolidating data into PostgreSQL.",
+        "Developed Selenium-based web scrapers and API integrations to ingest 5K–20K+ data points daily, normalizing inconsistent schemas across platforms.",
+        "Designed automated data pipelines to process streaming and social data, generating growth signals used to evaluate dozens of emerging recording artists.",
+        "Turned pipeline output into audience-targeting, engagement, and release-planning decisions for music-industry stakeholders."
+      ]
+    },
+    {
+      "title": "Full-Stack Growth Engineer",
+      "org": "Gusto",
+      "location": "Los Angeles, CA",
+      "dates": "Oct 2021 – Oct 2023",
+      "bullets": [
+        "Designed and executed dozens of A/B tests with React, TypeScript, and Ruby on Rails — nine in just six months — helping drive a 15.5% increase in Visit-to-Lead CvR and a 5.8% YoY increase in Direct 30-day Lead-to-Join CvR.",
+        "Led the redesign of the experiment tracker and built an in-house testing hub, cutting experiment setup time 40–60% and increasing process transparency.",
+        "Owned the off-hours Schedule-a-Call experiment, a 10% relative increase in payrolls run over control."
+      ]
+    },
+    {
+      "title": "Digital Marketer, Music Producer",
+      "org": "Freelance",
+      "location": "NYC + LA",
+      "dates": "2018 – 2020",
+      "bullets": [
+        "Automated content planning, creation, and marketing workflows using Python scripts to fill templates, enhancing operational efficiency and reducing onboarding time.",
+        "Overhauled lead gen for businesses and recording artists through landing pages with tracking pixels."
+      ]
+    },
+    {
+      "title": "Media Fellow",
+      "org": "UCSA (Non-Profit Org)",
+      "location": "Berkeley, CA",
+      "dates": "2017 – 2018",
+      "bullets": [
+        "Expanded social media reach 10x with targeted advertising, analytics, and custom Python scripts."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of California, Berkeley",
+      "detail": "Bachelor of Arts, Cognitive Science",
+      "year": "2021"
+    },
+    {
+      "school": "Galvanize",
+      "detail": "Advanced Software Engineering Immersive at Hack Reactor",
+      "year": "2020"
+    },
+    {
+      "school": "Formation Fellowship",
+      "detail": "Personalized coaching from top-tier SWEs",
+      "year": "2021, 2026"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Working Memory",
+      "detail": "Event-sourced task board you can rewind to any past state",
+      "tech": "Next.js, TypeScript, React, SQLite (better-sqlite3), Litestream, Backblaze B2, Docker, dnd-kit, Tailwind",
+      "link": "https://workingmemory.onrender.com",
+      "bullets": [
+        "Built an append-only, event-sourced task board where every edit, move, and completion is journaled by SQLite triggers, so the board's full state is reconstructable at any past moment, with multi-account isolation enforced at the query layer. Built with AI coding agents under a verification-first workflow: plans before code, a 243-check test suite before release.",
+        "Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot (each deploy doubles as a restore drill), backed by daily automated pulls to local storage and an uptime worker that eliminates cold-start churn."
+      ]
+    },
+    {
+      "name": "armak.tech",
+      "detail": "Production website for a Southern California low-voltage & networking firm",
+      "tech": "Vite, EJS, Vanilla JS, HTML Canvas, Web3Forms",
+      "link": "https://armak.tech",
+      "bullets": [
+        "Shipped the live production site for a real contractor: a static Vite + EJS build with hand-written HTML Canvas animations lazy-loaded per viewport, a backend-less Web3Forms lead form, and full Open Graph/SEO metadata — cutting Largest Contentful Paint ~90% with WebP heroes, preload, and fetchpriority."
+      ]
+    },
+    {
+      "name": "Incighder",
+      "detail": "Music-scouting tool that scores artist traction and trajectory from public platform metrics",
+      "tech": "Next.js 15, React 19, TypeScript, Python (Flask), TiDB Cloud Serverless (MySQL), Spotify / YouTube Data APIs, SSE, MCP",
+      "link": "https://incighder.vercel.app",
+      "bullets": [
+        "Collects artist metrics across seven platforms into per-artist snapshots in TiDB Cloud Serverless, scoring each on a 0–100 Traction index and a separate Trajectory dial from median weekly change — official APIs where they exist, public pages otherwise, throttled per host with a 24h cache.",
+        "Registers one 17-tool agent registry that backs both an in-app chat/voice assistant over SSE and an MCP server endpoint, kept live by a self-healing watchdog that health-probes the stack end to end every 20s and auto-restarts and republishes the tunnel — a kill -9 on the tunnel republished in 15s with the site back in 33s."
+      ]
+    },
+    {
+      "name": "Expert",
+      "detail": "Personal-knowledge tool that makes everything you've read searchable by content",
+      "tech": "React, Node.js, Express, JSON store (MySQL optional), MuPDF + Tesseract.js (WASM OCR)",
+      "link": "https://github.com/carlitoswillis/expert",
+      "bullets": [
+        "Captures documents and makes them searchable by content — detecting image-only scans and running a background WASM OCR pipeline (MuPDF page rasterization feeding a pooled Tesseract.js) so even text-less PDFs become searchable — turning a scattered pile of PDFs into one queryable research collection, with cross-source synthesis as the next arc."
+      ]
+    },
+    {
+      "name": "Ezzy Shop",
+      "detail": "E-commerce product service split into independently-scaled microservices",
+      "tech": "AWS EC2, Nginx, Redis, PostgreSQL, Node.js, Express, React, Docker, K6, Loader.io",
+      "bullets": [
+        "Boosted load capacity from 200 to 800 requests/sec and cut server response time from 230ms to 70ms by load-balancing 5 AWS EC2 instances behind Nginx with Redis caching and remedying database-schema bottlenecks."
+      ]
+    },
+    {
+      "name": "Ableton Library",
+      "detail": "Local-first catalog of a producer's Ableton projects, searchable by tempo, plugin, sample, or artist",
+      "tech": "Rust, Tauri, TypeScript, React, SQLite (FTS5), Python",
+      "link": "https://github.com/carlitoswillis/ableton-library",
+      "bullets": [
+        "Streaming-parses gzipped Ableton .als XML straight off disk to index tempo, devices, tracks, and samples across 2,379 sets in 1,586 projects (Live 9.5–11.3.43), so search and a 3D similarity 'galaxy' (shared samples/devices, tempo, artist prior) run with no Live install, via a 6-crate Rust/Tauri 2 workspace over a local SQLite FTS5 index.",
+        "Renders per-set audio previews from four prioritized sources — existing bounces on disk, a second Live install driven by macOS UI automation, a planned headless render, and an explicitly-labeled approximate 'sketch' renderer as fallback."
+      ]
+    }
+  ]
+}

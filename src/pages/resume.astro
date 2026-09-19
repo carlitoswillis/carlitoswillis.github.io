@@ -1,114 +1,30 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+// One source of truth: ../autojob/profile/resume.json, published here by
+// `npm run site:sync` in that repo as src/data/resume.public.json (phone
+// stripped — this site is email-only) and public/carlitos-willis-resume.pdf
+// (the generated PDF itself). Edit the résumé there, then re-run the sync.
+import resume from '../data/resume.public.json';
 
-const skills = [
-  { label: 'Languages', items: 'JavaScript (ES5/ES6), TypeScript, Python, Ruby, SQL, Rust, CSS3, HTML5' },
-  {
-    label: 'Technologies & Frameworks',
-    items:
-      'React, Node, Express, Next.js, Postgres, MySQL, SQLite, AWS CLI/EC2, Docker, Selenium, Jest, Webpack, Git, Amplitude, Optimizely, New Relic, Datadog, Styled-Components, Claude, Gemini CLI',
-  },
-];
+const c = resume.contact || {};
+const shortUrl = (u) => u.replace(/^(https?:)?\/\//i, '').replace(/\/$/, '');
+const fullUrl = (u) => (/^(https?:)?\/\//i.test(u) ? u : `https://${u}`);
+const links = [
+  c.email ? { label: c.email, href: `mailto:${c.email}`, external: false } : null,
+  c.github ? { label: shortUrl(c.github), href: fullUrl(c.github), external: true } : null,
+  c.linkedin ? { label: shortUrl(c.linkedin), href: fullUrl(c.linkedin), external: true } : null,
+].filter(Boolean);
 
-const experience = [
-  {
-    title: 'Independent Software Engineer & Consultant',
-    org: '',
-    location: 'Los Angeles, CA',
-    dates: 'November 2023 – Present',
-    bullets: [
-      'Built data aggregation tools in Python and Node.js to track audience growth and engagement across Spotify, TikTok, and YouTube, consolidating data into PostgreSQL.',
-      'Developed Selenium-based web scrapers and API integrations to ingest 5K–20K+ data points daily, normalizing inconsistent schemas across platforms.',
-      'Designed automated data pipelines to process streaming and social data, generating growth signals used to evaluate dozens of emerging recording artists.',
-      'Delivered data-driven insights that reduced manual analysis time and informed audience targeting, engagement strategy, and release planning for music industry stakeholders.',
-    ],
-  },
-  {
-    title: 'Full-Stack Engineer, Growth',
-    org: 'Gusto',
-    location: 'Los Angeles, CA',
-    dates: 'Oct 2021 – Oct 2023',
-    bullets: [
-      'Designed and executed nine A/B tests in six months with React, TypeScript, and Ruby, achieving a 15.5% increase in Visit-to-Lead Conversion Rate (CvR) and a 5.8% year-over-year increase in Direct 30-day Lead-to-Join CvR.',
-      'Led the redesign of the experiment tracker and setup process, significantly cutting setup time by 40–60% and increasing process transparency.',
-      'Developed an in-house testing hub, reducing experiment-sharing setup from an hour to 5 minutes.',
-    ],
-  },
-  {
-    title: 'Digital Marketer, Music Producer',
-    org: 'Freelance',
-    location: 'NYC + LA',
-    dates: '2018 – 2020',
-    bullets: [
-      'Automated content planning, creation, and marketing workflows using Python scripts to fill templates, enhancing operational efficiency and reducing onboarding time.',
-      'Overhauled lead gen for businesses and recording artists through landing pages with tracking pixels.',
-    ],
-  },
-  {
-    title: 'Media Fellow',
-    org: 'UCSA (Non-Profit Org)',
-    location: 'Berkeley, CA',
-    dates: '2017 – 2018',
-    bullets: [
-      'Expanded social media reach 10x with targeted advertising, analytics, and custom Python scripts.',
-    ],
-  },
-];
-
-const projects = [
-  {
-    name: 'Working Memory',
-    detail: 'Event-sourced task board you can rewind to any past state',
-    href: '/projects/working-memory/',
-    tech: 'Next.js, TypeScript, React, SQLite, Litestream, Backblaze B2, Docker, dnd-kit, Tailwind',
-    bullets: [
-      'Built an append-only, event-sourced task board where every edit, move, and completion appends to an item_events log via SQLite triggers — making the board’s full state reconstructable at any past point in time, with multi-account isolation enforced at the query layer.',
-      'Deployed on Render with a self-healing durability pipeline: Litestream streams the database to Backblaze B2 and restores it on every boot, backed by daily automated pulls and an uptime worker that tames free-tier cold starts.',
-    ],
-  },
-  {
-    name: 'Ableton Library',
-    detail: 'Rust catalog + desktop app for a decade of Ableton projects',
-    href: '/projects/ableton-library/',
-    tech: 'Rust, SQLite FTS5, Tauri, TypeScript',
-    bullets: [
-      'Wrote a lenient Rust parser for Ableton’s undocumented .als format (gzipped XML) feeding a SQLite FTS5 catalog: search hundreds of projects by tempo, plugin, sample, or artist in milliseconds, with waveform previews and a 3D similarity map in a Tauri app.',
-    ],
-  },
-  {
-    name: 'OP-1 Lab',
-    detail: 'Firmware reverse engineering; custom DSP on real hardware',
-    href: '/projects/op1-lab/',
-    tech: 'Blackfin assembly, Python, GNU bfin toolchain, op1repacker',
-    bullets: [
-      'Mapped the OP-1 synthesizer’s closed Blackfin firmware and injected a hand-written assembly synth engine that runs on the physical instrument — byte-verified patches, a host-side Blackfin interpreter for pre-flash verification, and strictly reversible changes.',
-    ],
-  },
-  {
-    name: 'armak.tech',
-    detail: 'Production website for a low-voltage & networking firm',
-    href: 'https://armak.tech',
-    tech: 'Vite, EJS, Vanilla JS, HTML Canvas, Web3Forms',
-    bullets: [
-      'Built and shipped the live production site for a real business: a static Vite + EJS build with hand-written HTML Canvas animations (a mouse-reactive particle network, an animated SVG service-area map) lazy-loaded per viewport via IntersectionObserver, a backend-less Web3Forms contact form, and full Open Graph / Twitter SEO metadata — cutting hero image payload ~90% (two 2.84 MB PNGs deleted; a 1.27 MB image down to 160 KB) by serving WebP heroes with preload and fetchpriority.',
-    ],
-  },
-  {
-    name: 'Ezzy Shop',
-    detail: 'E-commerce service split into independently-scaled microservices',
-    href: null,
-    tech: 'AWS EC2, Nginx, Redis, PostgreSQL, Node.js, Express, React, Docker, K6, Loader.io',
-    bullets: [
-      'Boosted load capacity from 200 to 800 requests/sec and cut server response time from 230ms to 70ms by load-balancing 5 AWS EC2 instances behind Nginx with Redis caching and remedying database-schema bottlenecks.',
-    ],
-  },
-];
-
-const education = [
-  { school: 'University of California, Berkeley', detail: 'Bachelor of Arts, Cognitive Science', year: '2021' },
-  { school: 'Galvanize', detail: 'Advanced Software Engineering Immersive at Hack Reactor', year: '2020' },
-  { school: 'Formation Fellowship', detail: 'Personalized coaching from top-tier SWEs', year: '2021, 2026' },
-];
+// A project with a case study on this site links there; otherwise to its own
+// live site or repo, as the résumé does.
+const studies = new Map((await getCollection('projects')).map((p) => [p.data.title.toLowerCase(), `/projects/${p.id}/`]));
+const projects = resume.projects.map((p) => {
+  const study = studies.get(p.name.toLowerCase());
+  return { ...p, href: study ?? (p.link ? fullUrl(p.link) : null), internal: Boolean(study) };
+});
+const { skills, experience, education, competencies = [], title } = resume;
+const subtitle = [title, c.location].filter(Boolean).join(' \u00b7 ');
 ---
 
 <Base
@@ -120,16 +36,16 @@ const education = [
     <header class="row pt-10 pb-8">
       <p class="idx" aria-hidden="true">CV</p>
       <div>
-        <h1 class="display">Carlitos Willis</h1>
-        <p class="mono mt-4 text-steel uppercase">Software Engineer &middot; Los Angeles, CA</p>
+        <h1 class="display">{resume.name}</h1>
+        <p class="mono mt-4 text-steel uppercase">{subtitle}</p>
         <div class="actions mt-5">
-          <a href="mailto:carlitoswillis@berkeley.edu" class="link">carlitoswillis@berkeley.edu</a>
-          <a href="https://github.com/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">github.com/carlitoswillis</a>
-          <a href="https://linkedin.com/in/carlitoswillis" class="link" target="_blank" rel="noopener noreferrer">linkedin.com/in/carlitoswillis</a>
+          {links.map((l) => (
+            l.external
+              ? <a href={l.href} class="link" target="_blank" rel="noopener noreferrer">{l.label}</a>
+              : <a href={l.href} class="link">{l.label}</a>
+          ))}
+          <a href="/carlitos-willis-resume.pdf" class="link no-print" target="_blank" rel="noopener noreferrer">download PDF</a>
         </div>
-        <p class="no-print caption mt-5">
-          Printable &mdash; use your browser's print dialog for a PDF copy.
-        </p>
       </div>
     </header>
 
@@ -137,6 +53,12 @@ const education = [
     <section class="row border-t border-rule pt-5 pb-10" aria-labelledby="r-skills">
       <h2 id="r-skills" class="eyebrow rail-sticky lg:pt-1">Skills</h2>
       <dl class="col small measure-small space-y-2">
+        {competencies.length > 0 && (
+          <div>
+            <dt class="mono inline text-steel uppercase">Competencies</dt>
+            <dd class="inline">&nbsp;&nbsp;{competencies.join(' \u00b7 ')}</dd>
+          </div>
+        )}
         {
           skills.map((s) => (
             <div>
@@ -185,7 +107,7 @@ const education = [
             <div>
               <h3 class="section-h measure-small">
                 {p.href ? (
-                  p.href.startsWith('http') ? (
+                  !p.internal ? (
                     <a href={p.href} class="link" target="_blank" rel="noopener noreferrer">
                       {p.name}
                     </a>
