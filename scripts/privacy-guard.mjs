@@ -23,7 +23,15 @@ function loadPatterns() {
   if (!raw.trim()) return null;
   const list = JSON.parse(raw);
   if (!Array.isArray(list) || list.length === 0) return null;
-  return list.map((s) => new RegExp(s));
+  // A pattern with no word characters (a stray ",\n  " from a mangled paste)
+  // matches every file in the tree and fails the build for the wrong reason.
+  // Drop it loudly, by index only — the patterns themselves are private.
+  const usable = list.filter((s, i) => {
+    if (typeof s === 'string' && /\w{3,}/.test(s)) return true;
+    console.error(`${inCI ? '::error::' : ''}privacy-guard: pattern #${i} is not a usable regex source; ignoring it. Re-set the patterns.`);
+    return false;
+  });
+  return usable.length ? usable.map((s) => new RegExp(s)) : null;
 }
 
 const PATTERNS = loadPatterns();
