@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import resume from '../data/resume.public.json';
 
 const projects = (await getCollection('projects'))
   .filter((p) => p.data.featured)
@@ -117,7 +118,8 @@ const isPortrait = (g: { width: number; height: number }[]) =>
           <span class="text-signal">$</span> currently: rewinding a task board, indexing a decade
           of Ableton sessions, building an audio analysis plugin
         </p>
-        <h1 class="display mt-6">I build systems that show their work.</h1>
+        <p class="mono mt-4 text-steel uppercase">{[resume.title, resume.contact?.location].filter(Boolean).join(' \u00b7 ')}</p>
+        <h1 class="display mt-5">I build systems that show their work.</h1>
 
         <div class="measure mt-10">
           <p class="lede">
