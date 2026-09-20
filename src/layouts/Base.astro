@@ -1,4 +1,6 @@
 ---
+import resume from '../data/resume.public.json';
+const role = resume.title;
 import '../styles/global.css';
 
 interface Props {
@@ -33,11 +35,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <header class="no-print border-b border-rule">
       <div class="wrap">
         <nav class="flex items-baseline justify-between gap-6 py-4">
-          <a
-            href="/"
-            class="font-display text-[0.9375rem] font-bold tracking-tight hover:text-signal"
-            >Carlitos Willis</a
-          >
+          <p class="flex items-baseline gap-3">
+            <a
+              href="/"
+              class="font-display text-[0.9375rem] font-bold tracking-tight hover:text-signal"
+              >{resume.name}</a
+            >
+            {role && <span class="mono hidden text-steel uppercase md:inline">{role}</span>}
+          </p>
           <div class="actions">
             <a href="/#record" class="link">projects</a>
             <a href="/resume/" class="link" target="_blank" rel="noopener noreferrer">resume</a>
