@@ -23,6 +23,9 @@ const projects = resume.projects.map((p) => {
   const study = studies.get(p.name.toLowerCase());
   return { ...p, href: study ?? (p.link ? fullUrl(p.link) : null), internal: Boolean(study) };
 });
+// A role with a write-up on this site gets a link under its bullets, keyed by
+// org here so the synced résumé data stays untouched.
+const roleStudies = { gusto: { label: 'Growth experiments write-up', href: '/projects/experiments/' } };
 const { skills, experience, education, competencies = [], title } = resume;
 const subtitle = [title, c.location].filter(Boolean).join(' \u00b7 ');
 ---
@@ -92,6 +95,13 @@ const subtitle = [title, c.location].filter(Boolean).join(' \u00b7 ');
                   </li>
                 ))}
               </ul>
+              {roleStudies[e.org?.toLowerCase()] && (
+                <p class="no-print small mt-3 pl-6">
+                  <a href={roleStudies[e.org.toLowerCase()].href} class="link">
+                    {roleStudies[e.org.toLowerCase()].label}
+                  </a>
+                </p>
+              )}
             </div>
           ))
         }
