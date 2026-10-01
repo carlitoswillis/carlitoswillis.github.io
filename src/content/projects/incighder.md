@@ -6,7 +6,6 @@ statusDetail: incighder.vercel.app
 live: true
 stack: [Next.js, TypeScript, Python, Flask, MySQL, Gemini 2.5 Flash]
 demo: https://incighder.vercel.app
-repo: https://github.com/carlitoswillis/incighder
 summary: An artist-scouting tool built around one question that turned out to be the hard part — are these accounts actually the same artist? Search-backed discovery finds candidate profiles across six platforms, Gemini verifies the ambiguous ones, and patient scraping turns the metrics into growth history and a single cross-platform traction score.
 order: 4
 featured: false
