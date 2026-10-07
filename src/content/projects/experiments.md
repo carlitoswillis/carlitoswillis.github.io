@@ -6,7 +6,7 @@ statusDetail: Funnel Optimization team
 live: false
 stack: [React, TypeScript, Rails, GraphQL, Optimizely, Amplitude]
 summary: Two years on a growth team at a payroll company, building A/B tests on the marketing site and in the signup flow behind it. In my busiest stretch I owned more experiments than anyone else on the team. I got better at building tests quickly, measuring them properly, and building the tools that made the next test cheaper.
-order: 7
+order: 6
 featured: false
 ---
 
